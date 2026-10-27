@@ -1,6 +1,6 @@
 # Roteiro proposto — Fisgada Pro
 
-A ordem abaixo é uma proposta, sem datas ou estimativas aprovadas.
+A ordem abaixo é uma proposta, sem datas ou estimativas aprovadas. Em 27/10/2026 foi autorizada a implementação inicial; veja STATUS_IMPLEMENTACAO.md.
 
 ## 1. Concluir o planejamento
 
@@ -8,7 +8,7 @@ A ordem abaixo é uma proposta, sem datas ou estimativas aprovadas.
 - Detalhar perfis e permissões por clube.
 - Desenhar fluxos e telas.
 - Aprovar o escopo inicial, o modelo conceitual e a arquitetura.
-- Obter autorização para iniciar o código.
+- Autorização para iniciar o código recebida em 27/10/2026.
 
 ## 2. Fundação e gestão associativa
 
@@ -43,4 +43,4 @@ A ordem abaixo é uma proposta, sem datas ou estimativas aprovadas.
 
 ## Critérios para as futuras entregas
 
-Cada etapa deverá verificar o fluxo funcional, as permissões e o isolamento por clube. Operações financeiras deverão manter histórico, evitar duplicidades e ser verificadas com cenários de falha. Não há testes de aplicação a executar nesta fase documental.
+Cada etapa deverá verificar o fluxo funcional, as permissões e o isolamento por clube. Operações financeiras deverão manter histórico, evitar duplicidades e ser verificadas com cenários de falha. A versão inicial oferece verificações executáveis de domínio e consultas demonstrativas. Cadastros reais, autenticação e persistência ainda dependem das próximas entregas.

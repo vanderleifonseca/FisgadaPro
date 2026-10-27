@@ -1,44 +1,63 @@
 # Fisgada Pro
 
-Sistema destinado a clubes de pesca, com gestão de associados, financeiro, eventos e serviços prestados pelo clube.
+Plataforma para clubes de pesca: associados, financeiro, embarcações, eventos e serviços.
 
-**Fase atual: planejamento. Não há aplicação executável nem código de negócio neste repositório.**
+**Versão 0.1.0 — demonstração local em desenvolvimento.** Não utilizar com dados reais. Esta entrega não possui login, banco de dados ou emissão de cobranças.
 
-## Objetivo
+## Começar pelo Visual Studio Code (azul)
 
-Atender vários clubes na mesma plataforma, permitindo novas adesões. A plataforma cadastra os clubes; a administração de cada clube gerencia seus próprios sócios. O associado acessa o aplicativo e seleciona seu clube.
+Consulte o [passo a passo com resultados esperados](docs/EXECUCAO_VSCODE.md).
 
-## Funcionalidades previstas
+Pré-requisito do servidor: SDK .NET 10. O arquivo global.json aceita SDKs 10.0 de bandas posteriores, incluindo 10.0.401.
 
-- Associados fundadores, mensalistas, atletas e familiares.
-- Mensalidades, cobranças e relatório de inadimplência.
-- Fundadores com mensalidade normal e opção de isenção.
-- Atletas com mensalidade definida pela diretoria, podendo também ser fundadores ou mensalistas.
-- Familiares sem taxa fixa adicional; seus débitos, incluindo cantina e eventos, compõem a cobrança do titular, identificando quem realizou a despesa.
-- Embarcações, guarda em estaleiro e colocação na água.
-- Manutenção, reparos e oficina.
-- Eventos com preços diferenciados para sócios do organizador, de outros clubes e não associados.
-- Comunicação interna e mensagens em massa, com alcance sujeito às permissões.
+~~~powershell
+dotnet build FisgadaPro.slnx
+dotnet run --project tests/FisgadaPro.Domain.Checks
+dotnet run --project src/FisgadaPro.Web --launch-profile http
+~~~
 
-Familiares admitidos: pais, avós e cônjuges sem limite de idade; filhos até 21 anos. O procedimento exato de encerramento da elegibilidade ainda será definido.
+Painel: http://localhost:5216. Em outro terminal, execute a API:
 
-## Tecnologia
+~~~powershell
+dotnet run --project src/FisgadaPro.Api --launch-profile http
+~~~
 
-Definido: **C# e .NET MAUI**.
+Status: http://localhost:5187/api/v1/status.
 
-Propostas ainda sujeitas à validação: painel Blazor, API ASP.NET Core, PostgreSQL e Entity Framework Core, organizados como monólito modular. Versões, infraestrutura e integrações ainda não foram escolhidas.
+## O que funciona nesta versão
+
+- Seleção entre dois clubes fictícios e consulta dos respectivos associados.
+- Prévia de extrato do titular, com gastos de familiar identificados.
+- Fundador paga normalmente; opção de isenção.
+- Atleta pode também ser fundador ou mensalista, com valor diferenciado.
+- Familiar sem taxa fixa adicional; seus gastos são atribuídos ao titular.
+- Verificações automatizadas de cálculo e separação dos clubes.
+- Aplicativo MAUI Android inicial com a mesma demonstração local; compilação e execução Android ainda precisam ser verificadas no ambiente móvel.
+
+Os valores exibidos são exemplos, não tabelas aprovadas pela diretoria. A combinação fundador isento + atleta é rejeitada até a definição da prioridade. O limite etário dos filhos ainda não é automatizado.
+
+## Estrutura
+
+| Projeto | Responsabilidade |
+| --- | --- |
+| Domain | Regras de associação, mensalidade e composição do extrato |
+| Contracts | Modelos de resposta |
+| Application | Consultas da demonstração |
+| Infrastructure | Dados fictícios em memória |
+| Api | Status e consultas HTTP locais |
+| Web | Painel Blazor Interactive Server |
+| App | MAUI Android; projeto compilado separadamente |
+| Domain.Checks | Verificações executáveis das regras |
+
+O painel e o app usam os dados demonstrativos localmente. A conexão dos clientes à API será implementada junto da autenticação. Selecionar clube na demonstração não representa autorização de acesso.
 
 ## Documentação
 
-- [Planejamento completo e regras confirmadas](docs/PLANEJAMENTO.md)
+- [Planejamento e regras](docs/PLANEJAMENTO.md)
 - [Decisões pendentes](docs/DECISOES_PENDENTES.md)
-- [Roteiro de desenvolvimento](docs/ROADMAP.md)
-- [Histórico de alterações](CHANGELOG.md)
-
-## Continuidade
-
-Antes de implementar, fechar as regras pendentes, os fluxos e o escopo da primeira versão. Preservar a distinção entre requisitos confirmados e sugestões. O início do código depende de nova autorização do responsável.
-
-Não existem comandos de execução, compilação ou testes nesta fase.
+- [Execução no VS Code](docs/EXECUCAO_VSCODE.md)
+- [Estado da implementação e limitações](docs/STATUS_IMPLEMENTACAO.md)
+- [Roteiro](docs/ROADMAP.md)
+- [Histórico](CHANGELOG.md)
 
 Responsável: Vanderlei Fonseca.

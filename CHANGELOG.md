@@ -1,5 +1,16 @@
 # Histórico de alterações
 
+## 0.1.0 — 2026-10-27 — Fundação e demonstração local
+
+- Início do código autorizado; Visual Studio Code (azul) definido.
+- Solução .NET 10 com Domain, Contracts, Application, Infrastructure, API e painel Blazor.
+- Projeto MAUI Android inicial separado da solução principal para não exigir workloads móveis ao compilar o servidor.
+- Cálculo de mensalidade, familiar sem taxa fixa, extrato do titular com consumidor identificado e rejeição de mistura de clubes.
+- Dados fictícios, consultas somente de leitura e demonstração disponível apenas em Development.
+- Tarefas do VS Code, instruções e verificações executáveis de regras.
+- Banco, login, cadastros persistentes, cobrança bancária e permissões reais ainda não implementados.
+
+
 ## 2026-10-27 — Familiares sem taxa fixa adicional
 
 - Confirmada a ausência de taxa fixa adicional por familiar.

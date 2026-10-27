@@ -1,0 +1,57 @@
+@page "/"
+@using FisgadaPro.Contracts
+@using FisgadaPro.Application
+@inject ConsultaDemonstracao Consulta
+<PageTitle>Fisgada Pro — início</PageTitle>
+<p class="etiqueta">PRIMEIRA VERSÃO · DEMONSTRAÇÃO LOCAL</p>
+<h1>Seu clube, bem administrado.</h1>
+<p>Consulte os associados e veja como os gastos familiares compõem a conta do titular.</p>
+<div class="aviso">Dados fictícios. Este protótipo não possui login, cadastro persistente ou emissão de cobranças.</div>
+<section class="selecao">
+    <label for="clube">Clube selecionado</label>
+    <select id="clube" value="@_clube" @onchange="TrocarClube">
+        @foreach (var clube in Consulta.Clubes()) { <option value="@clube.Id">@clube.Nome</option> }
+    </select>
+</section>
+<div class="cards">
+    <article><span>Associados</span><strong>@_pessoas.Count</strong></article>
+    <article><span>Familiares</span><strong>@_pessoas.Count(p => p.TitularId is not null)</strong></article>
+    <article><span>Taxa fixa por familiar</span><strong>R$ 0,00</strong></article>
+</div>
+<h2>Associados do clube</h2>
+<div class="tabela"><table>
+    <thead><tr><th>Nome</th><th>Categoria</th><th>Condições</th><th>Extrato</th></tr></thead>
+    <tbody>@foreach (var pessoa in _pessoas) {
+        <tr><td>@pessoa.Nome</td><td>@pessoa.Categoria</td>
+            <td>@(pessoa.Atleta ? "Atleta" : pessoa.Isento ? "Isento" : "Normal")</td>
+            <td>@if (pessoa.TitularId is null) { <button @onclick="() => Consultar(pessoa.Id)">Consultar prévia</button> } else { <span>Na conta do titular</span> }</td></tr>
+    }</tbody>
+</table></div>
+@if (_extrato is not null) {
+    <section class="extrato">
+        <h2>Prévia de extrato · @_extrato.Titular</h2>
+        <p>Mensalidade: <strong>@_extrato.Mensalidade.ToString("C")</strong></p>
+        <div class="tabela"><table><thead><tr><th>Quem fez a despesa</th><th>Origem</th><th>Descrição</th><th>Valor</th></tr></thead>
+        <tbody>@foreach (var item in _extrato.Despesas) { <tr><td>@item.Consumidor</td><td>@item.Origem</td><td>@item.Descricao</td><td>@item.Valor.ToString("C")</td></tr> }</tbody></table></div>
+        <p>Consumos: @_extrato.TotalConsumos.ToString("C")</p>
+        <p class="total">Total demonstrativo: @_extrato.Total.ToString("C")</p>
+        <small>Prévia sobre dados de exemplo. Não gera boleto, débito ou pagamento.</small>
+    </section>
+}
+@code {
+    private Guid _clube;
+    private IReadOnlyList<AssociadoDto> _pessoas = [];
+    private ExtratoDto? _extrato;
+    protected override void OnInitialized() {
+        _clube = Consulta.Clubes().First().Id;
+        Carregar();
+    }
+    private void TrocarClube(ChangeEventArgs args) {
+        if (Guid.TryParse(args.Value?.ToString(), out var id)) { _clube = id; Carregar(); }
+    }
+    private void Carregar() {
+        _pessoas = Consulta.Associados(_clube) ?? [];
+        _extrato = null;
+    }
+    private void Consultar(Guid titularId) => _extrato = Consulta.Extrato(_clube, titularId);
+}

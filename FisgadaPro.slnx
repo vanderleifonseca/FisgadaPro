@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/FisgadaPro.Domain/FisgadaPro.Domain.csproj" />
+    <Project Path="src/FisgadaPro.Contracts/FisgadaPro.Contracts.csproj" />
+    <Project Path="src/FisgadaPro.Application/FisgadaPro.Application.csproj" />
+    <Project Path="src/FisgadaPro.Infrastructure/FisgadaPro.Infrastructure.csproj" />
+    <Project Path="src/FisgadaPro.Api/FisgadaPro.Api.csproj" />
+    <Project Path="src/FisgadaPro.Web/FisgadaPro.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/"><Project Path="tests/FisgadaPro.Domain.Checks/FisgadaPro.Domain.Checks.csproj" /></Folder>
+</Solution>

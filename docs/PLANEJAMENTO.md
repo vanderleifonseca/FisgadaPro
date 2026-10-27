@@ -2,16 +2,16 @@
 
 Responsável: Vanderlei Fonseca  
 Data de consolidação: 26/10/2026  
-Versão: 1.3 — familiares sem taxa fixa adicional  
+Versão: 1.4 — início da implementação  
 Atualização: 27/10/2026  
 Nome comercial: Fisgada Pro  
-Status: requisitos em definição; nenhum código de aplicação iniciado.
+Status: implementação inicial autorizada; versão 0.1.0 com demonstração local.
 
 ## 1. Objetivo e orientação para continuidade
 
 Criar um sistema em C#, com aplicativo .NET MAUI, para atender vários clubes de pesca. Novos clubes poderão aderir à mesma plataforma. O associado acessará o aplicativo e selecionará o clube ao qual pertence.
 
-Este documento consolida a conversa de planejamento. Requisitos explicitamente solicitados e confirmados estão separados das propostas técnicas, que ainda dependem de validação. Não iniciar código sem uma nova solicitação de Vanderlei.
+Este documento consolida a conversa de planejamento. Requisitos explicitamente solicitados e confirmados estão separados das propostas técnicas, que ainda dependem de validação. Vanderlei autorizou o início da implementação em 27/10/2026 e definiu o Visual Studio Code (azul) como IDE.
 
 ## 2. Requisitos confirmados
 
@@ -156,7 +156,7 @@ Uma pessoa poderá acumular permissões. Descontos excepcionais, cancelamentos, 
 
 ## 5. Arquitetura técnica proposta
 
-Confirmado: C# e .NET MAUI. Demais escolhas abaixo são recomendações, sem implementação iniciada.
+Confirmados: C#, .NET MAUI e Visual Studio Code (azul). A implementação inicial usa .NET 10 e Blazor Interactive Server para demonstração. PostgreSQL, autenticação, persistência e integrações ainda não foram implementados.
 
 | Componente | Proposta |
 | --- | --- |
@@ -168,7 +168,7 @@ Confirmado: C# e .NET MAUI. Demais escolhas abaixo são recomendações, sem imp
 | Processamento assíncrono | Mensalidades, notificações e integrações |
 | Arquivos | Armazenamento privado com autorização por clube |
 
-Separação lógica: domínio, aplicação, infraestrutura, contratos, API, painel web e aplicativo. Versão do .NET, IDE, hospedagem, autenticação e fornecedores serão definidos na etapa técnica.
+Separação lógica: domínio, aplicação, infraestrutura, contratos, API, painel web e aplicativo. IDE definida: Visual Studio Code (azul). Base .NET 10, com global.json permitindo SDKs 10.0 de bandas posteriores. Hospedagem, autenticação e fornecedores serão definidos posteriormente.
 
 ### Isolamento entre clubes
 
@@ -214,7 +214,7 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 - Preços de estaleiro e movimentação; agendamento e retirada da água.
 - Formato dos eventos, percentuais de desconto, cancelamentos e reembolsos.
 - Alcance de mensagens em massa e comunicação entre clubes.
-- Plataformas móveis, IDE, hospedagem, versão do .NET e operação sem conexão.
+- Plataformas móveis além do Android inicial, hospedagem e operação sem conexão. IDE definida: Visual Studio Code (azul); base .NET 10.
 
 ## 10. Registro das decisões da conversa
 
@@ -232,8 +232,10 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 
 12. Confirmado: não haverá taxa fixa adicional por familiar.
 
+13. Em 27/10/2026, Vanderlei autorizou iniciar e escolheu o Visual Studio Code (azul).
+
 ## 11. Instrução pronta para retomar
 
-“Vamos continuar o projeto Fisgada Pro — Plataforma de Clubes de Pesca. Leia docs/PLANEJAMENTO.md. Preserve as regras confirmadas e diferencie-as das propostas ainda abertas. Vamos primeiro fechar os requisitos e detalhar os fluxos e as telas. Não escreva código até eu autorizar.”
+“Vamos continuar o projeto Fisgada Pro — Plataforma de Clubes de Pesca. Leia docs/PLANEJAMENTO.md. Preserve as regras confirmadas e diferencie-as das propostas ainda abertas. Vamos primeiro fechar os requisitos e detalhar os fluxos e as telas. Consulte docs/EXECUCAO_VSCODE.md e preserve as regras confirmadas ao continuar a implementação.”
 
-Repositório oficial: https://github.com/vanderleifonseca/FisgadaPro. A documentação inicial foi publicada em 27/10/2026. Nenhum código de aplicação foi iniciado.
+Repositório oficial: https://github.com/vanderleifonseca/FisgadaPro. A documentação inicial foi publicada em 27/10/2026. A versão 0.1.0 inicia a estrutura e a demonstração local; veja docs/STATUS_IMPLEMENTACAO.md.

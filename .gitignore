@@ -9,7 +9,9 @@ TestResults/
 # Configuração local das IDEs
 .vs/
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
 
 # Credenciais e configuração local
 .env
