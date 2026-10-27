@@ -15,7 +15,7 @@ Atualizado em 27/10/2026. O quadro distingue decisões resolvidas e pontos ainda
 | DP-09 | Movimentação | Agendamento, capacidade, preço da colocação e eventual cobrança pela retirada. |
 | DP-10 | Eventos | Percentuais, elegibilidade de familiares, equipes/barcos, capacidade, cancelamentos e reembolsos. |
 | DP-11 | Comunicação | Alcance da diretoria, mensagens entre clubes, canais e moderação. |
-| DP-12 | Tecnologia | Visual Studio Code (azul) definido. Base iniciada em .NET 10 e Android. Definir outros sistemas móveis, hospedagem, autenticação e operação offline. |
+| DP-12 | Tecnologia | Visual Studio Code (azul) definido. Base iniciada em .NET 10 e Android. Definir outros sistemas móveis, hospedagem, autenticação de produção/recuperação de senha e operação offline. Login local de teste implementado na versão 0.2.0. |
 | DP-13 | Plataforma | Modelo de adesão e cobrança dos clubes. |
 | DP-14 | Consumos e faturamento | Definir corte, vencimento e cancelamentos; tratamento de despesas de familiares em eventos de outros clubes, sem presumir repasse automático. |
 

@@ -7,5 +7,6 @@
     <Project Path="src/FisgadaPro.Api/FisgadaPro.Api.csproj" />
     <Project Path="src/FisgadaPro.Web/FisgadaPro.Web.csproj" />
   </Folder>
-  <Folder Name="/tests/"><Project Path="tests/FisgadaPro.Domain.Checks/FisgadaPro.Domain.Checks.csproj" /></Folder>
+  <Folder Name="/tests/"><Project Path="tests/FisgadaPro.Access.Checks/FisgadaPro.Access.Checks.csproj" /><Project Path="tests/FisgadaPro.Domain.Checks/FisgadaPro.Domain.Checks.csproj" /></Folder>
+  <Folder Name="/tools/"><Project Path="tools/FisgadaPro.Setup/FisgadaPro.Setup.csproj" /></Folder>
 </Solution>

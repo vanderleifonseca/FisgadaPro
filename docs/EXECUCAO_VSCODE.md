@@ -1,99 +1,45 @@
-# Executar o Fisgada Pro no Visual Studio Code (azul)
+# Execução no Visual Studio Code (azul)
 
-## 1. Obter o código
+A versão 0.2.0 exige login e API para o painel e o app. Siga [Login e acessos](LOGIN_E_ACESSOS.md) para configurar contas e executar.
 
-Se ainda não houver uma cópia local, abra o PowerShell:
-
-~~~powershell
-cd C:\maui
-git clone https://github.com/vanderleifonseca/FisgadaPro.git
-cd FisgadaPro
-code .
-~~~
-
-Resultado esperado: VS Code aberto na pasta que contém FisgadaPro.slnx.
-
-Se já houver cópia local, entre nela, confira `git status` e use `git pull --ff-only` somente com as alterações locais preservadas.
-
-## 2. Conferir o SDK e as extensões
-
-~~~powershell
-dotnet --version
-~~~
-
-Resultado esperado: versão 10.0.x. O SDK 10.0.401 já usado nos seus projetos é compatível com o global.json.
-
-Instale as extensões recomendadas: C#, C# Dev Kit e .NET MAUI. Use Terminal → Novo Terminal, ou Ctrl+Shift+P → Tasks: Run Task para as tarefas Fisgada Pro.
-
-## 3. Compilar o servidor e as regras
+## Comandos na raiz do projeto
 
 ~~~powershell
 dotnet build FisgadaPro.slnx
-~~~
-
-Resultado esperado: compilação concluída sem erros. A solução principal não inclui App, portanto não exige Android SDK nem workload MAUI.
-
-## 4. Verificar os cálculos
-
-~~~powershell
+dotnet run --project tools/FisgadaPro.Setup
 dotnet run --project tests/FisgadaPro.Domain.Checks
+dotnet run --project tests/FisgadaPro.Access.Checks
 ~~~
 
-Resultado esperado: “13 verificações de regras concluídas com sucesso.” Este projeto é um verificador executável; use este comando, não dotnet test.
-
-## 5. Abrir o painel
-
-~~~powershell
-dotnet run --project src/FisgadaPro.Web --launch-profile http
-~~~
-
-Resultado esperado: “Now listening on: http://localhost:5216”. Mantenha o terminal aberto e acesse esse endereço.
-
-Selecione Clube Lago e consulte Alex Exemplo. A prévia apresenta mensalidade de R$ 150,00 e gastos de Bia Exemplo de R$ 25,00 e R$ 80,00, totalizando R$ 255,00. São valores fictícios.
-
-Troque para Clube Rio: os associados e o extrato anterior devem desaparecer. Consulte Dani Exemplo, cujo exemplo tem isenção.
-
-## 6. Abrir a API em outro terminal
+API e painel devem ser executados em terminais separados:
 
 ~~~powershell
 dotnet run --project src/FisgadaPro.Api --launch-profile http
 ~~~
 
-Resultado esperado: API em http://localhost:5187. Teste:
-
 ~~~powershell
-Invoke-RestMethod http://localhost:5187/api/v1/status
-Invoke-RestMethod http://localhost:5187/api/v1/demonstracao/clubes
+dotnet run --project src/FisgadaPro.Web --launch-profile http
 ~~~
 
-O primeiro comando retorna sistema, versão e estado; o segundo retorna dois clubes fictícios. Não há Swagger nem endpoints de gravação nesta entrega. O painel demonstra os dados em memória sem depender do processo da API.
+Painel http://localhost:5216/entrar; status http://localhost:5187/api/v1/status.
 
-## 7. Aplicativo Android — etapa de validação local
+A API precisa ser iniciada com --urls http://0.0.0.0:5187 para testes a partir do celular, conforme o guia de login.
 
-O projeto App foi gerado do template oficial MAUI e adaptado para Android. Ele ainda não foi compilado ou executado em dispositivo nesta entrega.
+## Android
 
-~~~powershell
-dotnet workload list
-adb devices
-~~~
-
-Resultado esperado: workload MAUI/Android disponível e dispositivo com estado device. Se faltar o workload, instalar conforme sua configuração do .NET:
+SDK localizado no ambiente de Vanderlei em C:\Program Files (x86)\Android\android-sdk.
 
 ~~~powershell
-dotnet workload install maui
+& "C:\Program Files (x86)\Android\android-sdk\platform-tools\adb.exe" devices
+dotnet build src/FisgadaPro.App/FisgadaPro.App.csproj -t:Run -p:AndroidSdkDirectory="C:\Program Files (x86)\Android\android-sdk"
 ~~~
 
-Com SDK Android e JDK configurados:
+O estado do celular deve ser device. A conexão ADB pode ser USB ou Wi-Fi; IP e porta de depuração podem mudar. No app, informe o IP do computador e a porta da API (5187), sem confundir com ADB.
 
-~~~powershell
-dotnet build src/FisgadaPro.App/FisgadaPro.App.csproj
-dotnet build src/FisgadaPro.App/FisgadaPro.App.csproj -t:Run
-~~~
+A versão 0.1.0 e a correção dos SVGs foram compiladas e executadas pelo usuário em dispositivo, inclusive por Wi-Fi. A atualização Android 0.2.0 ainda depende de compilação e validação local.
 
-A segunda operação exige um emulador iniciado ou celular conectado; selecione o dispositivo na extensão .NET MAUI quando houver mais de um. O app usa dados fictícios locais, sem depender da API ou de endereços de rede do emulador.
-
-Android é o alvo inicial. iOS poderá ser incluído depois, com o ambiente de compilação apropriado.
+Extensões recomendadas: C#, C# Dev Kit e .NET MAUI. A solução principal não inclui o projeto MAUI, para permitir compilar o servidor sem workload Android.
 
 ## Encerrar
 
-Ctrl+C em cada terminal que estiver executando o painel ou a API. Não publique esta demonstração: autenticação, permissões e persistência serão implementadas antes de operação real.
+Ctrl+C nos terminais da API e do painel. Sair encerra a sessão do cliente; tokens já emitidos vencem em até 20 minutos. O modo atual usa dados de demonstração, sem operações bancárias.

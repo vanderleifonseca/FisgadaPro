@@ -1,34 +1,34 @@
-# Estado da implementação — 0.1.0
+# Estado da implementação — 0.2.0
 
-Atualizado em 27/10/2026.
+Atualização: 27/10/2026.
 
 ## Entregue
 
-Estrutura C#/.NET 10, API de consulta demonstrativa, painel Blazor, aplicativo Android inicial e regras de domínio para mensalidades e extrato familiar. IDE definida: Visual Studio Code (azul).
+- Login com contas de teste configuradas localmente, sem senha padrão no código.
+- Hash de senha do ASP.NET Core Identity; segredos locais armazenam somente o hash.
+- Tokens opacos do ASP.NET Core na API, com validade de 20 minutos.
+- Sessão web por cookie HttpOnly, com proteção antiforgery nos formulários de entrada e saída.
+- Limite de cinco tentativas de login por minuto por IP.
+- Verificação de perfil e clube em cada endpoint de dados.
+- Sócio consulta o próprio extrato; administrador consulta seu clube; plataforma lista clubes sem dados financeiros.
+- Painel conectado à API. Aplicativo alterado para login de associado e consulta autenticada do próprio extrato.
+- Consumidor identificado e responsabilidade do titular preservados; familiar sem taxa fixa adicional.
 
-- Familiar tem mensalidade adicional zero.
-- Despesas preservam consumidor e são atribuídas ao titular.
-- Fundador paga a tabela normal, salvo isenção.
-- Atleta pode ser fundador ou mensalista e usa tabela diferenciada.
-- Fundador isento e atleta simultaneamente não tem cálculo automático: a prioridade continua pendente.
-- Registros de clubes diferentes são rejeitados ao compor o extrato.
+## Verificação
 
-## Validação realizada
+- Solução principal e configurador compilados com .NET 10.
+- 13 verificações de regras financeiras aprovadas.
+- 22 verificações de acesso e fluxo HTTP aprovadas, incluindo cookie web, CSRF, login incorreto, limites e tentativas entre perfis/clubes.
+- Fluxo web exercitado por HTTP e conteúdo renderizado. Interação visual da versão 0.2.0 ainda deve ser testada no navegador pelo usuário.
+- Versão Android 0.1.0 e correção de SVGs confirmadas pelo usuário em aparelho, via cabo e Wi-Fi.
+- Android 0.2.0: fontes alteradas; sem SDK Android no ambiente do agente para compilação. Validar no ambiente local do usuário.
 
-- Solução principal compilada com SDK 10.0.100: zero erros e zero avisos.
-- 13 verificações executáveis de regras aprovadas.
-- API iniciada e consultada por HTTP; extrato demonstrativo totalizou R$ 255,00.
-- Consulta do titular usando outro clube retornou 404.
-- HTML inicial do painel renderizado com os dados de exemplo.
-- Interação no navegador não verificada: o ambiente não disponibilizou um Chromium executável e o download do navegador falhou. Validar os botões e a troca de clube no ambiente local.
-- Android: estrutura baseada no template oficial; sem build ou execução no dispositivo nesta entrega.
+## Limites explícitos
 
-## Limitações e próximo incremento
+Os três perfis estão vinculados a dados fictícios fixos, e não há banco de usuários. As contas são configuradas por ferramenta local; não há cadastro público, recuperação de senha, MFA ou revogação imediata de tokens. Sair descarta a sessão do cliente; tokens emitidos vencem em até 20 minutos.
 
-Sem autenticação, permissões reais, cadastro/edição persistente, PostgreSQL, geração de mensalidades por competência, cobranças bancárias ou notificações. O extrato atual é apenas uma prévia dos lançamentos de exemplo, sem calendário de faturamento.
+API e painel continuam somente para Development. O app Debug permite HTTP para rede local; Release requer HTTPS. Ainda não existe configuração de produção.
 
-O painel e app consultam um serviço demonstrativo em memória. A futura operação usará API autenticada; não interpretar seleção de clube como autorização. API só publica consultas fictícias em Development; o painel bloqueia inicialização fora desse ambiente.
+Não há persistência dos associados/lançamentos, cadastros reais, gestão de novos clubes, múltiplos vínculos configuráveis, permissões de operador/financeiro/manutenção/diretoria, cobrança bancária, estaleiro, eventos operacionais ou oficina. O limite etário dos filhos permanece pendente.
 
-Não há automatização da idade dos filhos enquanto o marco etário não for definido. Ainda não há operação de eventos, estaleiro, oficina ou cantina além dos lançamentos fictícios.
-
-Próxima entrega recomendada: autenticação, autorização por clube e persistência, seguida do cadastro de clubes, titulares e familiares. Confirmar regras pendentes antes de automatizar cobranças reais.
+Próximo incremento: persistência e cadastros reais, preservando autenticação e autorização no servidor.

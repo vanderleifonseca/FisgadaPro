@@ -6,13 +6,14 @@
     <UseMaui>true</UseMaui><SingleProject>true</SingleProject>
     <ApplicationTitle>Fisgada Pro</ApplicationTitle>
     <ApplicationId>br.com.fisgadapro.app</ApplicationId>
-    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion><ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>0.2.0</ApplicationDisplayVersion><ApplicationVersion>1</ApplicationVersion>
     <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'"><AndroidManifest>Platforms/Android/AndroidManifest.Debug.xml</AndroidManifest></PropertyGroup>
   <ItemGroup>
     <MauiIcon Include="Resources/AppIcon/appicon.svg" ForegroundFile="Resources/AppIcon/appiconfg.svg" Color="#103C32" />
     <MauiSplashScreen Include="Resources/Splash/splash.svg" Color="#103C32" BaseSize="128,128" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <ProjectReference Include="../FisgadaPro.Infrastructure/FisgadaPro.Infrastructure.csproj" />
+    <ProjectReference Include="../FisgadaPro.Contracts/FisgadaPro.Contracts.csproj" />
   </ItemGroup>
 </Project>

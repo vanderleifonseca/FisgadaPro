@@ -1,63 +1,66 @@
 # Fisgada Pro
 
-Plataforma para clubes de pesca: associados, financeiro, embarcações, eventos e serviços.
+Plataforma para clubes de pesca em C#, API ASP.NET Core, Blazor e .NET MAUI Android. IDE: Visual Studio Code (azul).
 
-**Versão 0.1.0 — demonstração local em desenvolvimento.** Não utilizar com dados reais. Esta entrega não possui login, banco de dados ou emissão de cobranças.
+**Versão 0.2.0 — login e permissões sobre dados fictícios.** Os dados financeiros continuam demonstrativos. Não há banco de dados, cadastro de usuários reais ou cobrança bancária.
 
-## Começar pelo Visual Studio Code (azul)
+## Começar
 
-Consulte o [passo a passo com resultados esperados](docs/EXECUCAO_VSCODE.md).
-
-Pré-requisito do servidor: SDK .NET 10. O arquivo global.json aceita SDKs 10.0 de bandas posteriores, incluindo 10.0.401.
+Siga [LOGIN_E_ACESSOS.md](docs/LOGIN_E_ACESSOS.md). O login agora é obrigatório; a API deve estar funcionando para o painel e para o celular.
 
 ~~~powershell
 dotnet build FisgadaPro.slnx
-dotnet run --project tests/FisgadaPro.Domain.Checks
-dotnet run --project src/FisgadaPro.Web --launch-profile http
+dotnet run --project tools/FisgadaPro.Setup
 ~~~
 
-Painel: http://localhost:5216. Em outro terminal, execute a API:
+O configurador solicita os e-mails e senhas locais de três perfis. Não há senha padrão. Somente hashes são armazenados no user-secrets da API, fora do repositório.
+
+Após configurar, abra a API e o painel em terminais separados:
 
 ~~~powershell
 dotnet run --project src/FisgadaPro.Api --launch-profile http
 ~~~
 
-Status: http://localhost:5187/api/v1/status.
+~~~powershell
+dotnet run --project src/FisgadaPro.Web --launch-profile http
+~~~
 
-## O que funciona nesta versão
+Painel: http://localhost:5216/entrar. API: http://localhost:5187/api/v1/status.
 
-- Seleção entre dois clubes fictícios e consulta dos respectivos associados.
-- Prévia de extrato do titular, com gastos de familiar identificados.
-- Fundador paga normalmente; opção de isenção.
-- Atleta pode também ser fundador ou mensalista, com valor diferenciado.
-- Familiar sem taxa fixa adicional; seus gastos são atribuídos ao titular.
-- Verificações automatizadas de cálculo e separação dos clubes.
-- Aplicativo MAUI Android inicial com a mesma demonstração local; compilação e execução Android ainda precisam ser verificadas no ambiente móvel.
+## Acessos desta etapa
 
-Os valores exibidos são exemplos, não tabelas aprovadas pela diretoria. A combinação fundador isento + atleta é rejeitada até a definição da prioridade. O limite etário dos filhos ainda não é automatizado.
-
-## Estrutura
-
-| Projeto | Responsabilidade |
+| Perfil | Acesso na demonstração |
 | --- | --- |
-| Domain | Regras de associação, mensalidade e composição do extrato |
-| Contracts | Modelos de resposta |
-| Application | Consultas da demonstração |
-| Infrastructure | Dados fictícios em memória |
-| Api | Status e consultas HTTP locais |
-| Web | Painel Blazor Interactive Server |
-| App | MAUI Android; projeto compilado separadamente |
-| Domain.Checks | Verificações executáveis das regras |
+| Associado | Alex Exemplo: Clube Lago, próprio extrato e gastos de Bia identificados |
+| Administrador do clube | Associados e extratos do Clube Lago; sem acesso ao Clube Rio |
+| Plataforma | Nomes dos clubes; sem acesso às listas de sócios ou extratos |
 
-O painel e o app usam os dados demonstrativos localmente. A conexão dos clientes à API será implementada junto da autenticação. Selecionar clube na demonstração não representa autorização de acesso.
+Os vínculos são fixos apenas nesta demonstração. A gestão de cadastros, múltiplos vínculos reais, operadores, diretoria, financeiro e manutenção serão implementados com persistência e permissões específicas.
+
+No app, uma conta administrativa é orientada a usar o painel web. A API também verifica permissões em cada consulta; ocultar elementos na tela não é a única proteção.
+
+## Verificações
+
+~~~powershell
+dotnet run --project tests/FisgadaPro.Domain.Checks
+dotnet run --project tests/FisgadaPro.Access.Checks
+~~~
+
+Resultados esperados: 13 verificações financeiras e 22 verificações de acesso/fluxo HTTP. Os testes de acesso iniciam sua própria API e seu próprio painel em portas temporárias, com credenciais aleatórias, sem alterar suas contas locais.
+
+## Regras mantidas
+
+Fundador paga normalmente, com opção de isenção; atleta pode ser fundador ou mensalista e tem valor definido pela direção. Familiar não possui taxa fixa adicional e seus gastos são atribuídos ao titular com identificação do consumidor. Valores de exemplo: mensalidade de Alex R$ 150,00 e consumos de Bia R$ 105,00; total R$ 255,00.
 
 ## Documentação
 
-- [Planejamento e regras](docs/PLANEJAMENTO.md)
-- [Decisões pendentes](docs/DECISOES_PENDENTES.md)
+- [Login, contas locais e conexão do celular](docs/LOGIN_E_ACESSOS.md)
 - [Execução no VS Code](docs/EXECUCAO_VSCODE.md)
-- [Estado da implementação e limitações](docs/STATUS_IMPLEMENTACAO.md)
-- [Roteiro](docs/ROADMAP.md)
+- [Estado e limitações](docs/STATUS_IMPLEMENTACAO.md)
+- [Planejamento](docs/PLANEJAMENTO.md)
+- [Decisões pendentes](docs/DECISOES_PENDENTES.md)
 - [Histórico](CHANGELOG.md)
+
+SDK .NET 10; global.json aceita bandas posteriores, incluindo 10.0.401. O App compila separadamente da solução principal e precisa do workload Android/MAUI.
 
 Responsável: Vanderlei Fonseca.

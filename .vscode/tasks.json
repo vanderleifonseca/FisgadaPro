@@ -1,9 +1,78 @@
 {
-  "version":"2.0.0",
-  "tasks":[
-    {"label":"Fisgada Pro: compilar","type":"process","command":"dotnet","args":["build","FisgadaPro.slnx"],"problemMatcher":"$msCompile","group":{"kind":"build","isDefault":true}},
-    {"label":"Fisgada Pro: verificar regras","type":"process","command":"dotnet","args":["run","--project","tests/FisgadaPro.Domain.Checks"],"problemMatcher":"$msCompile"},
-    {"label":"Fisgada Pro: API","type":"process","command":"dotnet","args":["run","--project","src/FisgadaPro.Api","--launch-profile","http"],"problemMatcher":"$msCompile"},
-    {"label":"Fisgada Pro: painel","type":"process","command":"dotnet","args":["run","--project","src/FisgadaPro.Web","--launch-profile","http"],"problemMatcher":"$msCompile"}
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Fisgada Pro: compilar",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "FisgadaPro.slnx"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Fisgada Pro: verificar regras",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "tests/FisgadaPro.Domain.Checks"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Fisgada Pro: API",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "src/FisgadaPro.Api",
+        "--launch-profile",
+        "http"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Fisgada Pro: painel",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "src/FisgadaPro.Web",
+        "--launch-profile",
+        "http"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Fisgada Pro: configurar contas locais",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "tools/FisgadaPro.Setup"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Fisgada Pro: verificar acessos",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "tests/FisgadaPro.Access.Checks"
+      ],
+      "problemMatcher": "$msCompile"
+    }
   ]
 }

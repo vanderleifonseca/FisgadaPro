@@ -1,57 +1,70 @@
 @page "/"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
 @using FisgadaPro.Contracts
-@using FisgadaPro.Application
-@inject ConsultaDemonstracao Consulta
-<PageTitle>Fisgada Pro — início</PageTitle>
-<p class="etiqueta">PRIMEIRA VERSÃO · DEMONSTRAÇÃO LOCAL</p>
-<h1>Seu clube, bem administrado.</h1>
-<p>Consulte os associados e veja como os gastos familiares compõem a conta do titular.</p>
-<div class="aviso">Dados fictícios. Este protótipo não possui login, cadastro persistente ou emissão de cobranças.</div>
-<section class="selecao">
-    <label for="clube">Clube selecionado</label>
-    <select id="clube" value="@_clube" @onchange="TrocarClube">
-        @foreach (var clube in Consulta.Clubes()) { <option value="@clube.Id">@clube.Nome</option> }
-    </select>
-</section>
-<div class="cards">
-    <article><span>Associados</span><strong>@_pessoas.Count</strong></article>
-    <article><span>Familiares</span><strong>@_pessoas.Count(p => p.TitularId is not null)</strong></article>
-    <article><span>Taxa fixa por familiar</span><strong>R$ 0,00</strong></article>
-</div>
-<h2>Associados do clube</h2>
-<div class="tabela"><table>
-    <thead><tr><th>Nome</th><th>Categoria</th><th>Condições</th><th>Extrato</th></tr></thead>
-    <tbody>@foreach (var pessoa in _pessoas) {
-        <tr><td>@pessoa.Nome</td><td>@pessoa.Categoria</td>
-            <td>@(pessoa.Atleta ? "Atleta" : pessoa.Isento ? "Isento" : "Normal")</td>
-            <td>@if (pessoa.TitularId is null) { <button @onclick="() => Consultar(pessoa.Id)">Consultar prévia</button> } else { <span>Na conta do titular</span> }</td></tr>
-    }</tbody>
-</table></div>
+@using FisgadaPro.Web.Services
+@inject ApiAutenticada Api
+<PageTitle>Fisgada Pro</PageTitle>
+@if (_erro is not null) { <div class="aviso" role="alert">@_erro <a href="/entrar">Entrar novamente</a></div> }
+else if (_sessao is null) { <p>Carregando sua conta...</p> }
+else {
+<h1>@(_sessao.Perfil == "Socio" ? "Área do associado" : _sessao.Perfil == "Plataforma" ? "Administração da plataforma" : "Administração do clube")</h1>
+<p>Bem-vindo, @_sessao.Nome.</p>
+<div class="aviso">Demonstração com login. Dados fictícios, sem emissão de cobranças.</div>
+<form method="post" action="/autenticacao/sair"><AntiforgeryToken /><button type="submit">Sair</button></form>
+<section class="selecao"><label for="clube">Clube</label>
+<select id="clube" value="@_clube" @onchange="TrocarClube" disabled="@_ocupado">
+@foreach (var c in _sessao.Clubes) { <option value="@c.Id">@c.Nome</option> }
+</select></section>
+@if (_sessao.Perfil == "Plataforma") { <p>A plataforma consulta os clubes cadastrados. A operação financeira pertence a cada clube. Cadastro de novos clubes será implementado depois.</p> }
+@if (_sessao.Perfil == "Administrador") {
+<h2>Associados do seu clube</h2>
+<div class="tabela"><table><thead><tr><th>Nome</th><th>Categoria</th><th>Extrato</th></tr></thead>
+<tbody>@foreach (var p in _pessoas) {
+<tr><td>@p.Nome</td><td>@p.Categoria @(p.Atleta ? "· Atleta" : "")</td><td>
+@if (p.TitularId is null) { <button disabled="@_ocupado" @onclick="() => Consultar(p.Id)">Consultar prévia</button> }
+else { <span>Na conta do titular</span> }
+</td></tr>
+}</tbody></table></div>
+}
 @if (_extrato is not null) {
-    <section class="extrato">
-        <h2>Prévia de extrato · @_extrato.Titular</h2>
-        <p>Mensalidade: <strong>@_extrato.Mensalidade.ToString("C")</strong></p>
-        <div class="tabela"><table><thead><tr><th>Quem fez a despesa</th><th>Origem</th><th>Descrição</th><th>Valor</th></tr></thead>
-        <tbody>@foreach (var item in _extrato.Despesas) { <tr><td>@item.Consumidor</td><td>@item.Origem</td><td>@item.Descricao</td><td>@item.Valor.ToString("C")</td></tr> }</tbody></table></div>
-        <p>Consumos: @_extrato.TotalConsumos.ToString("C")</p>
-        <p class="total">Total demonstrativo: @_extrato.Total.ToString("C")</p>
-        <small>Prévia sobre dados de exemplo. Não gera boleto, débito ou pagamento.</small>
-    </section>
+<section class="extrato"><h2>Conta de @_extrato.Titular</h2>
+<p>Mensalidade: @_extrato.Mensalidade.ToString("C")</p>
+<p>Taxa fixa adicional por familiar: R$ 0,00</p>
+<div class="tabela"><table><thead><tr><th>Quem fez a despesa</th><th>Descrição</th><th>Valor</th></tr></thead>
+<tbody>@foreach (var d in _extrato.Despesas) { <tr><td>@d.Consumidor</td><td>@d.Descricao</td><td>@d.Valor.ToString("C")</td></tr> }</tbody></table></div>
+<p class="total">Total demonstrativo: @_extrato.Total.ToString("C")</p></section>
+}
 }
 @code {
+    private SessaoDto? _sessao;
     private Guid _clube;
     private IReadOnlyList<AssociadoDto> _pessoas = [];
     private ExtratoDto? _extrato;
-    protected override void OnInitialized() {
-        _clube = Consulta.Clubes().First().Id;
-        Carregar();
+    private string? _erro;
+    private bool _ocupado;
+    protected override async Task OnInitializedAsync() {
+        try {
+            _sessao = await Api.Get<SessaoDto>("/api/v1/sessao");
+            _clube = _sessao.Clubes.First().Id;
+            await Carregar();
+        } catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException) { _erro = "Sessão expirada ou API indisponível."; }
     }
-    private void TrocarClube(ChangeEventArgs args) {
-        if (Guid.TryParse(args.Value?.ToString(), out var id)) { _clube = id; Carregar(); }
+    private async Task TrocarClube(ChangeEventArgs e) {
+        if (_ocupado || !Guid.TryParse(e.Value?.ToString(), out var id) || _sessao!.Clubes.All(c => c.Id != id)) return;
+        _clube = id; await Carregar();
     }
-    private void Carregar() {
-        _pessoas = Consulta.Associados(_clube) ?? [];
-        _extrato = null;
+    private async Task Carregar() {
+        _ocupado = true; _extrato = null; _pessoas = [];
+        try {
+            if (_sessao!.Perfil == "Socio") _extrato = await Api.Get<ExtratoDto>($"/api/v1/clubes/{_clube}/meu-extrato");
+            else if (_sessao.Perfil == "Administrador") _pessoas = await Api.Get<IReadOnlyList<AssociadoDto>>($"/api/v1/clubes/{_clube}/associados");
+        } catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException) { _erro = "Não foi possível carregar os dados. Entre novamente."; }
+        finally { _ocupado = false; }
     }
-    private void Consultar(Guid titularId) => _extrato = Consulta.Extrato(_clube, titularId);
+    private async Task Consultar(Guid id) {
+        _ocupado = true;
+        try { _extrato = await Api.Get<ExtratoDto>($"/api/v1/clubes/{_clube}/titulares/{id}/extrato"); }
+        catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException) { _erro = "Não foi possível consultar o extrato."; }
+        finally { _ocupado = false; }
+    }
 }

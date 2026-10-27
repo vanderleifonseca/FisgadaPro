@@ -1,5 +1,16 @@
 # Histórico de alterações
 
+## 0.2.0 — 2026-10-27 — Login e separação dos acessos
+
+- Contas locais com hash de senha e configurador sem senhas padrão.
+- API protegida por token, autorização por perfil e clube e limite de tentativas.
+- Painel conectado à API e sessão web com cookie e antiforgery.
+- App consulta autenticada do próprio extrato, sem lista geral de associados.
+- Novos testes de acesso, separação entre clubes e fluxo de formulário.
+- Dados financeiros e vínculos continuam fictícios; persistência real fica para a próxima etapa.
+- Build e execução Android da versão anterior confirmados pelo usuário, inclusive por Wi-Fi.
+
+
 ## 2026-10-27 — Contorno para erro de processamento das imagens Android
 
 - Substituídas letras FP em elementos SVG de texto por contornos vetoriais no ícone e na tela de abertura.

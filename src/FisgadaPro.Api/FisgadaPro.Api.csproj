@@ -1,1 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk.Web"><PropertyGroup><TargetFramework>net10.0</TargetFramework></PropertyGroup><ItemGroup><ProjectReference Include="../FisgadaPro.Infrastructure/FisgadaPro.Infrastructure.csproj" /></ItemGroup></Project>
+<Project Sdk="Microsoft.NET.Sdk.Web"><PropertyGroup><TargetFramework>net10.0</TargetFramework><UserSecretsId>FisgadaPro.Api.Local</UserSecretsId></PropertyGroup><ItemGroup><ProjectReference Include="../FisgadaPro.Infrastructure/FisgadaPro.Infrastructure.csproj" /></ItemGroup></Project>
