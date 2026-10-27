@@ -1,5 +1,13 @@
 # Histórico de alterações
 
+## 2026-10-27 — Contorno para erro de processamento das imagens Android
+
+- Substituídas letras FP em elementos SVG de texto por contornos vetoriais no ícone e na tela de abertura.
+- Evitado o processamento de fontes que disparou MissingMethodException em HarfBuzzSharp.Font.SetVariations no ambiente Android.
+- Recursos continuam com dimensões explícitas, sem dependência de fontes.
+- A recompilação Android deve ser validada no ambiente do usuário.
+
+
 ## 0.1.0 — 2026-10-27 — Fundação e demonstração local
 
 - Início do código autorizado; Visual Studio Code (azul) definido.
