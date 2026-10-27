@@ -1,0 +1,29 @@
+# Compilação .NET
+[Bb]in/
+[Oo]bj/
+artifacts/
+TestResults/
+*.user
+*.suo
+
+# Configuração local das IDEs
+.vs/
+.idea/
+.vscode/
+
+# Credenciais e configuração local
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.Local.json
+*.pfx
+*.p12
+*.keystore
+*.jks
+
+# Arquivos temporários
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
