@@ -12,6 +12,9 @@ Atender vários clubes na mesma plataforma, permitindo novas adesões. A platafo
 
 - Associados fundadores, mensalistas, atletas e familiares.
 - Mensalidades, cobranças e relatório de inadimplência.
+- Fundadores com mensalidade normal e opção de isenção.
+- Atletas com mensalidade definida pela diretoria, podendo também ser fundadores ou mensalistas.
+- Débitos de familiares, incluindo cantina e eventos, na cobrança do titular, identificando quem realizou a despesa.
 - Embarcações, guarda em estaleiro e colocação na água.
 - Manutenção, reparos e oficina.
 - Eventos com preços diferenciados para sócios do organizador, de outros clubes e não associados.

@@ -1,12 +1,12 @@
 # Decisões pendentes — Fisgada Pro
 
-Atualizado em 27/10/2026. Os itens abaixo ainda não foram aprovados.
+Atualizado em 27/10/2026. O quadro distingue decisões resolvidas e pontos ainda pendentes.
 
 | ID | Tema | Decisão necessária |
 | --- | --- | --- |
-| DP-01 | Categorias | Fundador, mensalista e atleta podem acumular condições? |
-| DP-02 | Cobrança associativa | Definir mensalidades, isenções e benefícios por categoria e por clube. |
-| DP-03 | Familiares | Definir cobrança própria, adicional ao titular ou inclusão sem custo. |
+| DP-01 | Resolvido | Atleta pode também ser fundador ou mensalista. |
+| DP-02 | Cobrança associativa — parcial | Fundador paga normalmente com opção de isenção; atleta paga valor definido pela diretoria. Definir valores, autorização/vigência de isenções e prioridade quando fundador isento também for atleta. |
+| DP-03 | Familiares — parcial | Débitos, cantina e eventos compõem a cobrança do titular com identificação do familiar. Definir se existe taxa fixa adicional por familiar. |
 | DP-04 | Idade dos filhos | Confirmar se “até 21 anos” termina ao completar 21 ou 22 anos; definir aviso e migração de categoria. |
 | DP-05 | Família e menores | Documentação, eventual inclusão de companheiros, acesso de menores e responsabilidade do titular. |
 | DP-06 | Pagamentos | Meios, bancos, provedor, contas recebedoras, vencimentos, multas e juros. |
@@ -18,9 +18,11 @@ Atualizado em 27/10/2026. Os itens abaixo ainda não foram aprovados.
 | DP-12 | Tecnologia | Sistemas móveis iniciais, versão do .NET, IDE, hospedagem, autenticação e operação offline. |
 | DP-13 | Plataforma | Modelo de adesão e cobrança dos clubes. |
 
+| DP-14 | Consumos e faturamento | Definir corte, vencimento e cancelamentos; tratamento de despesas de familiares em eventos de outros clubes, sem presumir repasse automático. |
+
 ## Próximo assunto sugerido
 
-Fechar DP-01, DP-02 e DP-03: condições dos fundadores, atletas e familiares. A sugestão de permitir configuração de preços e benefícios por clube ainda depende de confirmação.
+Definir meios de pagamento e regras de faturamento: como reunir mensalidade e consumos do titular e dos familiares, mantendo os lançamentos discriminados.
 
 ## Como registrar uma decisão
 

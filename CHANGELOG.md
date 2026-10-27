@@ -1,5 +1,12 @@
 # Histórico de alterações
 
+## 2026-10-27 — Regras de associados e débitos familiares
+
+- Confirmada mensalidade normal dos fundadores, com opção de isenção.
+- Confirmada mensalidade diferenciada de atleta definida pela diretoria e sua coexistência com fundador ou mensalista.
+- Confirmada inclusão dos débitos familiares na cobrança mensal do titular, incluindo cantina e eventos, com identificação do consumidor.
+- Mantidas abertas a eventual taxa fixa por familiar, a prioridade de isenções e as regras de faturamento entre clubes.
+
 ## 2026-10-27 — Documentação inicial
 
 - Definido o nome Fisgada Pro.

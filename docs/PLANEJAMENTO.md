@@ -2,7 +2,7 @@
 
 Responsável: Vanderlei Fonseca  
 Data de consolidação: 26/10/2026  
-Versão: 1.1 — nome do sistema definido  
+Versão: 1.2 — mensalidades e responsabilidade financeira familiar  
 Atualização: 27/10/2026  
 Nome comercial: Fisgada Pro  
 Status: requisitos em definição; nenhum código de aplicação iniciado.
@@ -27,6 +27,17 @@ Este documento consolida a conversa de planejamento. Requisitos explicitamente s
 
 Categorias previstas: sócios fundadores, mensalistas, atletas e familiares.
 
+Regras confirmadas:
+
+- Fundadores pagam mensalidade normalmente; o sistema deve oferecer opção de isenção.
+- Atletas têm mensalidade diferenciada, cujo valor é definido pela diretoria do clube.
+- Um atleta pode também ser fundador ou mensalista. A condição de atleta deve coexistir com a condição associativa de base.
+- Os débitos dos familiares são incluídos na cobrança mensal do titular.
+- Gastos dos familiares em cantina e eventos são lançados para o titular, identificando o familiar que realizou cada despesa.
+- A responsabilidade financeira do titular e a identificação de quem consumiu são informações distintas.
+
+A cobrança de uma taxa fixa adicional pela inclusão de familiar não foi definida. A atribuição dos débitos ao titular não implica gratuidade nem fixa tal taxa.
+
 Os familiares permitidos, conforme confirmação do usuário, são:
 
 | Parentesco com o titular | Limite de idade |
@@ -48,6 +59,8 @@ Na resposta anterior, o assistente propôs interpretar o limite como até a vés
 - Cobrança de valor predeterminado pela direção para colocar embarcações dos sócios na água.
 - Mensalidade de estaleiro para guardar embarcações.
 - Oferta de manutenção, reparos e oficina.
+- Lançamentos de despesas de cantina, com identificação de quem consumiu.
+- Consolidação de débitos dos familiares na cobrança mensal do titular, mantendo a identificação de cada despesa e do familiar responsável pelo consumo.
 
 ### 2.4 Eventos compartilhados
 
@@ -70,7 +83,7 @@ Na resposta anterior, o assistente propôs interpretar o limite como até a vés
 
 Uma conta por pessoa, com vínculos independentes em vários clubes. Seleção apenas entre clubes autorizados. A pessoa poderá exercer funções diferentes em cada clube. Permissões serão separadas da categoria associativa: um fundador poderá também ser diretor ou operador.
 
-Proposta: categoria principal com identificações adicionais, permitindo que fundador ou mensalista também seja atleta. A possibilidade de acumular categorias ainda deve ser validada.
+Confirmado: a condição de atleta pode coexistir com fundador ou mensalista. Proposta de modelagem: categoria associativa de base e condição adicional de atleta. A prioridade entre isenção de fundador e mensalidade de atleta ainda precisa ser definida.
 
 Separar situação associativa (em análise, ativo, suspenso, desligado) da situação financeira. Não suspender automaticamente um vínculo apenas por existir cobrança vencida sem regra aprovada.
 
@@ -82,7 +95,7 @@ Além do cadastro confirmado de clubes, propõe-se cadastro do administrador ini
 
 Cada familiar terá cadastro individual, data de nascimento quando necessária, parentesco e vínculo com titular no clube. Aprovação e eventual comprovação de parentesco serão definidas pelo clube.
 
-Pendências: cobrança própria, inclusão na cobrança do titular, gratuidade, acesso ao app por menores e procedimento ao atingir o limite etário. Não presumir exclusão automática do familiar.
+Confirmado: os débitos familiares compõem a cobrança mensal do titular, incluindo cantina e eventos, com identificação de quem realizou a despesa. Pendências: eventual taxa fixa adicional por familiar, acesso ao app por menores e procedimento ao atingir o limite etário. Não presumir exclusão automática do familiar.
 
 ### Embarcações e estaleiro
 
@@ -105,6 +118,14 @@ Fluxo proposto: solicitação → avaliação → orçamento → aprovação →
 Prever cobranças recorrentes, recebimentos, pagamentos parciais, cancelamentos, estornos, renegociação e demonstrativo por associado. Juros, multas, descontos e vencimentos dependem das regras aprovadas.
 
 Proposta: cada clube receber diretamente em sua própria conta. Provedores de Pix, boleto, cartão e canais de envio ainda não foram escolhidos. Integrações deverão confirmar pagamentos e evitar duplicação de cobranças ou baixas em reprocessamentos.
+
+### Cantina e conta do titular
+
+Confirmado: registrar gastos de cantina e atribuir ao titular os gastos de seus familiares. Uma gestão completa de cantina, estoque, compras, caixa ou emissão fiscal não foi solicitada; o escopo atual contempla o lançamento da despesa.
+
+Proposta de detalhamento: cada lançamento registra clube, titular devedor, pessoa que consumiu, origem (cantina, evento ou outro serviço), data, descrição e valor. O demonstrativo mensal discrimina mensalidade e demais despesas, preservando seus tipos e a pessoa que as originou. A consolidação não deve transformar consumo em valor de mensalidade associativa.
+
+Ainda definir: corte de faturamento, vencimento dos consumos, tratamento de cancelamentos e despesas realizadas em eventos de outros clubes. Não presumir transferência automática de débitos entre clubes.
 
 ### Eventos
 
@@ -159,7 +180,7 @@ Prever auditoria, cópias de segurança, recuperação testada, proteção de da
 
 ## 6. Entidades conceituais iniciais
 
-Clube; usuário; vínculo com clube; perfil; permissão; categoria associativa; vínculo familiar; embarcação; autorização de uso; vaga; contrato de guarda; movimentação; serviço; orçamento; ordem de serviço; peça/material; cobrança; item de cobrança; pagamento; alocação de pagamento; evento; regra de preço; inscrição; comunicado; mensagem; grupo; registro de leitura; auditoria.
+Clube; usuário; vínculo com clube; perfil; permissão; categoria associativa; condição de atleta; vínculo familiar; lançamento de consumo com titular e consumidor; embarcação; autorização de uso; vaga; contrato de guarda; movimentação; serviço; orçamento; ordem de serviço; peça/material; cobrança; item de cobrança; pagamento; alocação de pagamento; evento; regra de preço; inscrição; comunicado; mensagem; grupo; registro de leitura; auditoria.
 
 Este é um mapa conceitual, não um esquema de banco aprovado. Definir propriedade e isolamento por clube antes do modelo físico.
 
@@ -184,11 +205,11 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 ## 9. Decisões pendentes para a próxima conversa
 
 - Modelo de adesão dos clubes.
-- Categorias exclusivas ou acumuláveis; preços e benefícios de cada uma.
+- Preços, benefícios, autorização e vigência de isenções; prioridade entre isenção de fundador e mensalidade de atleta.
 - Regra operacional exata do limite de 21 anos e tratamento após o prazo.
-- Aceitação de companheiros, documentação familiar e cobrança dos familiares.
+- Aceitação de companheiros, documentação familiar e eventual taxa fixa adicional por familiar; os débitos já são atribuídos ao titular.
 - Permissões de menores e responsabilidade do titular.
-- Meios de pagamento, bancos, vencimentos, juros e multas.
+- Meios de pagamento, bancos, vencimentos, juros e multas; corte dos consumos e tratamento de despesas em outros clubes.
 - Efeitos da inadimplência sobre serviços e descontos.
 - Preços de estaleiro e movimentação; agendamento e retirada da água.
 - Formato dos eventos, percentuais de desconto, cancelamentos e reembolsos.
@@ -205,6 +226,9 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 6. Vanderlei confirmou que o limite de 21 anos se aplica aos filhos; os demais vínculos listados não têm limite etário.
 7. Vanderlei solicitou guardar o projeto para continuidade e futura criação do código.
 8. Em 27/10/2026, Vanderlei definiu o nome do sistema como Fisgada Pro.
+9. Fundadores pagam mensalidade normalmente, com opção de isenção.
+10. Atletas têm mensalidade diferenciada definida pela diretoria e podem também ser fundadores ou mensalistas.
+11. Débitos dos familiares, incluindo cantina e eventos, são lançados na cobrança mensal do titular, identificando quem fez a despesa.
 
 ## 11. Instrução pronta para retomar
 
