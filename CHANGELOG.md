@@ -1,5 +1,11 @@
 # Histórico de alterações
 
+## 2026-10-27 — Familiares sem taxa fixa adicional
+
+- Confirmada a ausência de taxa fixa adicional por familiar.
+- Mantida a cobrança dos gastos ao titular, com identificação de quem fez cada despesa.
+- Resolvida a pendência DP-03.
+
 ## 2026-10-27 — Regras de associados e débitos familiares
 
 - Confirmada mensalidade normal dos fundadores, com opção de isenção.

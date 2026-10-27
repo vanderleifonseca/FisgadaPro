@@ -6,7 +6,7 @@ Atualizado em 27/10/2026. O quadro distingue decisões resolvidas e pontos ainda
 | --- | --- | --- |
 | DP-01 | Resolvido | Atleta pode também ser fundador ou mensalista. |
 | DP-02 | Cobrança associativa — parcial | Fundador paga normalmente com opção de isenção; atleta paga valor definido pela diretoria. Definir valores, autorização/vigência de isenções e prioridade quando fundador isento também for atleta. |
-| DP-03 | Familiares — parcial | Débitos, cantina e eventos compõem a cobrança do titular com identificação do familiar. Definir se existe taxa fixa adicional por familiar. |
+| DP-03 | Resolvido | Não há taxa fixa adicional por familiar. Débitos, cantina e eventos compõem a cobrança do titular com identificação do familiar. |
 | DP-04 | Idade dos filhos | Confirmar se “até 21 anos” termina ao completar 21 ou 22 anos; definir aviso e migração de categoria. |
 | DP-05 | Família e menores | Documentação, eventual inclusão de companheiros, acesso de menores e responsabilidade do titular. |
 | DP-06 | Pagamentos | Meios, bancos, provedor, contas recebedoras, vencimentos, multas e juros. |
@@ -17,7 +17,6 @@ Atualizado em 27/10/2026. O quadro distingue decisões resolvidas e pontos ainda
 | DP-11 | Comunicação | Alcance da diretoria, mensagens entre clubes, canais e moderação. |
 | DP-12 | Tecnologia | Sistemas móveis iniciais, versão do .NET, IDE, hospedagem, autenticação e operação offline. |
 | DP-13 | Plataforma | Modelo de adesão e cobrança dos clubes. |
-
 | DP-14 | Consumos e faturamento | Definir corte, vencimento e cancelamentos; tratamento de despesas de familiares em eventos de outros clubes, sem presumir repasse automático. |
 
 ## Próximo assunto sugerido

@@ -2,7 +2,7 @@
 
 Responsável: Vanderlei Fonseca  
 Data de consolidação: 26/10/2026  
-Versão: 1.2 — mensalidades e responsabilidade financeira familiar  
+Versão: 1.3 — familiares sem taxa fixa adicional  
 Atualização: 27/10/2026  
 Nome comercial: Fisgada Pro  
 Status: requisitos em definição; nenhum código de aplicação iniciado.
@@ -36,7 +36,7 @@ Regras confirmadas:
 - Gastos dos familiares em cantina e eventos são lançados para o titular, identificando o familiar que realizou cada despesa.
 - A responsabilidade financeira do titular e a identificação de quem consumiu são informações distintas.
 
-A cobrança de uma taxa fixa adicional pela inclusão de familiar não foi definida. A atribuição dos débitos ao titular não implica gratuidade nem fixa tal taxa.
+Não haverá taxa fixa adicional por familiar. Os gastos realizados pelos familiares continuam sendo lançados na cobrança mensal do titular, com identificação de quem fez cada despesa.
 
 Os familiares permitidos, conforme confirmação do usuário, são:
 
@@ -95,7 +95,7 @@ Além do cadastro confirmado de clubes, propõe-se cadastro do administrador ini
 
 Cada familiar terá cadastro individual, data de nascimento quando necessária, parentesco e vínculo com titular no clube. Aprovação e eventual comprovação de parentesco serão definidas pelo clube.
 
-Confirmado: os débitos familiares compõem a cobrança mensal do titular, incluindo cantina e eventos, com identificação de quem realizou a despesa. Pendências: eventual taxa fixa adicional por familiar, acesso ao app por menores e procedimento ao atingir o limite etário. Não presumir exclusão automática do familiar.
+Confirmado: os débitos familiares compõem a cobrança mensal do titular, incluindo cantina e eventos, com identificação de quem realizou a despesa. Não há taxa fixa adicional por familiar. Pendências: acesso ao app por menores e procedimento ao atingir o limite etário. Não presumir exclusão automática do familiar.
 
 ### Embarcações e estaleiro
 
@@ -207,7 +207,7 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 - Modelo de adesão dos clubes.
 - Preços, benefícios, autorização e vigência de isenções; prioridade entre isenção de fundador e mensalidade de atleta.
 - Regra operacional exata do limite de 21 anos e tratamento após o prazo.
-- Aceitação de companheiros, documentação familiar e eventual taxa fixa adicional por familiar; os débitos já são atribuídos ao titular.
+- Aceitação de companheiros e documentação familiar; não há taxa fixa adicional, e os débitos são atribuídos ao titular.
 - Permissões de menores e responsabilidade do titular.
 - Meios de pagamento, bancos, vencimentos, juros e multas; corte dos consumos e tratamento de despesas em outros clubes.
 - Efeitos da inadimplência sobre serviços e descontos.
@@ -229,6 +229,8 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 9. Fundadores pagam mensalidade normalmente, com opção de isenção.
 10. Atletas têm mensalidade diferenciada definida pela diretoria e podem também ser fundadores ou mensalistas.
 11. Débitos dos familiares, incluindo cantina e eventos, são lançados na cobrança mensal do titular, identificando quem fez a despesa.
+
+12. Confirmado: não haverá taxa fixa adicional por familiar.
 
 ## 11. Instrução pronta para retomar
 
