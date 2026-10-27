@@ -25,7 +25,7 @@ O programa pergunta e-mail e senha para cada perfil:
 | Socio | socio@fisgada.test | Alex Exemplo, titular de Bia |
 | Plataforma | plataforma@fisgada.test | Consulta dos clubes |
 
-Pressione Enter para aceitar cada e-mail sugerido. Escolha uma senha de 12 a 256 caracteres e confirme-a; os caracteres não aparecem enquanto você digita. Use e-mails diferentes para os perfis.
+Pressione Enter para aceitar cada e-mail sugerido. Escolha uma senha de 4 a 256 caracteres, conforme a regra temporária para estas contas locais de teste, e confirme-a; os caracteres não aparecem enquanto você digita. Use e-mails diferentes para os perfis.
 
 Resultado esperado: “Contas de teste configuradas”. Somente hashes de senha são gravados no user-secrets FisgadaPro.Api.Local, fora do Git. Não envie suas senhas na conversa.
 

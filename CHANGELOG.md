@@ -1,5 +1,11 @@
 # Histórico de alterações
 
+## 2026-10-27 — Senhas curtas para contas locais de teste
+
+- Reduzido o mínimo de senha no configurador de 12 para 4 caracteres, a pedido do responsável, temporariamente para testes locais.
+- Mantidos hash de senha, confirmação e limite de tentativas de login.
+
+
 ## 0.2.0 — 2026-10-27 — Login e separação dos acessos
 
 - Contas locais com hash de senha e configurador sem senhas padrão.

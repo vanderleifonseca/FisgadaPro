@@ -14,9 +14,9 @@ foreach (var perfil in new[] { "Administrador", "Socio", "Plataforma" })
     var email = Console.ReadLine()?.Trim();
     email = string.IsNullOrEmpty(email) ? padrao : email;
     if (!email.Contains('@') || !emails.Add(email)) { Console.Error.WriteLine("E-mail inválido ou repetido."); return 1; }
-    Console.Write($"Senha de {perfil} (mínimo 12 caracteres): ");
+    Console.Write($"Senha de {perfil} (mínimo 4 caracteres): ");
     var senha = LerSenha();
-    if (senha.Length < 12 || senha.Length > 256) { Console.Error.WriteLine("Use entre 12 e 256 caracteres."); return 1; }
+    if (senha.Length < 4 || senha.Length > 256) { Console.Error.WriteLine("Use entre 4 e 256 caracteres."); return 1; }
     Console.Write("Confirme a senha: ");
     if (LerSenha() != senha) { Console.Error.WriteLine("As senhas não coincidem."); return 1; }
     valores[$"Acessos:{perfil}:Email"] = email;
