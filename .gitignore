@@ -33,3 +33,5 @@ Thumbs.db
 # Dados e credenciais locais de desenvolvimento
 **/App_Data/
 **/core
+
+**/App_Data.migracao-*/

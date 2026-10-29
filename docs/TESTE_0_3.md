@@ -1,4 +1,4 @@
-# Teste guiado — Fisgada Pro 0.3
+# Teste guiado — Clube360 0.3
 
 ## 1. Atualizar e abrir
 
@@ -7,7 +7,7 @@ Pare os processos anteriores com Ctrl+C e faça backup de dados existentes. No t
 ```powershell
 cd C:\maui\FisgadaPro
 git pull --ff-only
-dotnet build FisgadaPro.slnx
+dotnet build Clube360.slnx
 ```
 
 Inicie a API e o Web em terminais separados conforme [Execução](EXECUCAO_VSCODE.md). Abra http://localhost:5216/entrar e entre novamente com suas credenciais existentes. Não execute o configurador se já possui contas.

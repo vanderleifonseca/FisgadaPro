@@ -1,10 +1,10 @@
-# Fisgada Pro — Plataforma de Clubes de Pesca
+# Clube360 — Plataforma de Clubes de Pesca
 
 Responsável: Vanderlei Fonseca  
 Data de consolidação: 26/10/2026  
 Versão: 1.5 — login e separação de acessos  
 Atualização: 27/10/2026  
-Nome comercial: Fisgada Pro  
+Nome comercial: Clube360  
 Status: implementação inicial autorizada; versão 0.2.0 com login sobre demonstração local.
 
 ## 1. Objetivo e orientação para continuidade
@@ -192,7 +192,7 @@ Painel: visão geral; clubes no nível da plataforma; associados; familiares; us
 
 ## 8. Etapas propostas
 
-1. Fechar regras pendentes e escopo da primeira versão. Nome definido: Fisgada Pro.
+1. Fechar regras pendentes e escopo da primeira versão. Nome definido: Clube360.
 2. Detalhar permissões, fluxos e telas.
 3. Aprovar modelo conceitual, arquitetura e integrações.
 4. Mediante autorização para código, implementar fundação multiclube, associados, categorias, familiares, financeiro e comunicados.
@@ -225,7 +225,7 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 5. Vanderlei incluiu pais, filhos, avós e cônjuges como familiares.
 6. Vanderlei confirmou que o limite de 21 anos se aplica aos filhos; os demais vínculos listados não têm limite etário.
 7. Vanderlei solicitou guardar o projeto para continuidade e futura criação do código.
-8. Em 27/10/2026, Vanderlei definiu o nome do sistema como Fisgada Pro.
+8. Em 27/10/2026, Vanderlei definiu o nome do sistema como Clube360.
 9. Fundadores pagam mensalidade normalmente, com opção de isenção.
 10. Atletas têm mensalidade diferenciada definida pela diretoria e podem também ser fundadores ou mensalistas.
 11. Débitos dos familiares, incluindo cantina e eventos, são lançados na cobrança mensal do titular, identificando quem fez a despesa.
@@ -238,6 +238,6 @@ A priorização é uma proposta. O isolamento entre clubes deve existir desde a 
 
 ## 11. Instrução pronta para retomar
 
-“Vamos continuar o projeto Fisgada Pro — Plataforma de Clubes de Pesca. Leia docs/PLANEJAMENTO.md. Preserve as regras confirmadas e diferencie-as das propostas ainda abertas. Vamos primeiro fechar os requisitos e detalhar os fluxos e as telas. Consulte docs/EXECUCAO_VSCODE.md e preserve as regras confirmadas ao continuar a implementação.”
+“Vamos continuar o projeto Clube360 — Plataforma de Clubes de Pesca. Leia docs/PLANEJAMENTO.md. Preserve as regras confirmadas e diferencie-as das propostas ainda abertas. Vamos primeiro fechar os requisitos e detalhar os fluxos e as telas. Consulte docs/EXECUCAO_VSCODE.md e preserve as regras confirmadas ao continuar a implementação.”
 
 Repositório oficial: https://github.com/vanderleifonseca/FisgadaPro. A documentação inicial foi publicada em 27/10/2026. A versão 0.2.0 adiciona login e autorização à demonstração local; veja docs/STATUS_IMPLEMENTACAO.md.

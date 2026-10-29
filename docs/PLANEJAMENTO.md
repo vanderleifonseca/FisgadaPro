@@ -1,6 +1,6 @@
 # Planejamento — gestão social de clubes
 
-Escopo atualizado a partir das orientações de Vanderlei. Nome do sistema mantido: Fisgada Pro. O planejamento anterior está em [histórico 0.2](historico/PLANEJAMENTO_0_2.md).
+Escopo atualizado a partir das orientações de Vanderlei. Nome do sistema mantido: Clube360. O planejamento anterior está em [histórico 0.2](historico/PLANEJAMENTO_0_2.md).
 
 ## Plataforma e clubes
 

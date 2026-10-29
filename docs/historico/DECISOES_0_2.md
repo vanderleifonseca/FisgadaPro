@@ -1,4 +1,4 @@
-# Decisões pendentes — Fisgada Pro
+# Decisões pendentes — Clube360
 
 Atualizado em 27/10/2026. O quadro distingue decisões resolvidas e pontos ainda pendentes.
 

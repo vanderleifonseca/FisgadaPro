@@ -1,5 +1,9 @@
 # Histórico de alterações
 
+## 0.3.1 — Clube360
+
+Marca, títulos, cabeçalho, ícone C360, tela de abertura, namespaces, solução, projetos, tarefas VS Code e documentação atualizados para Clube360. Credenciais locais e identificador Android preservados por compatibilidade. Primeira execução copia os arquivos de dados da antiga API, mantendo a origem como backup e sem sobrescrever dados novos. Novas instalações usam e-mails de exemplo @clube360.test; instalações existentes mantêm seus e-mails.
+
 ## 0.3.0 — Gestão social de clubes
 
 Adaptação para foz 2 e guaira2, novos cadastros, categorias associativas e dependentes. Perfis SuperAdmin, Presidente, Administrador, Tesoureiro e Socio. Persistência JSON local, criação de acessos, eventos públicos/restritos e convites com aprovação. Agenda de espaços, prevenção de conflito, aluguel com lançamento financeiro e cancelamento até 120 horas antes. Mensalidades por competência, inadimplência e baixa manual auditada. Solicitações/reclamações com histórico. Painel Blazor e app MAUI atualizados. Boleto permanece pendente de integração bancária; Android desta versão aguarda validação local. Planejamento anterior preservado em docs/historico.
@@ -56,7 +60,7 @@ Adaptação para foz 2 e guaira2, novos cadastros, categorias associativas e dep
 
 ## 2026-10-27 — Documentação inicial
 
-- Definido o nome Fisgada Pro.
+- Definido o nome Clube360.
 - Consolidado o planejamento multiclube e os requisitos confirmados.
 - Registradas categorias e regras de familiares.
 - Separadas propostas técnicas e decisões pendentes.

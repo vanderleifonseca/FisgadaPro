@@ -2,12 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Fisgada Pro: compilar",
+      "label": "Clube360: compilar",
       "type": "process",
       "command": "dotnet",
       "args": [
         "build",
-        "FisgadaPro.slnx"
+        "Clube360.slnx"
       ],
       "problemMatcher": "$msCompile",
       "group": {
@@ -16,61 +16,61 @@
       }
     },
     {
-      "label": "Fisgada Pro: verificar regras",
+      "label": "Clube360: verificar regras",
       "type": "process",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "tests/FisgadaPro.Domain.Checks"
+        "tests/Clube360.Domain.Checks"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Fisgada Pro: API",
+      "label": "Clube360: API",
       "type": "process",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "src/FisgadaPro.Api",
+        "src/Clube360.Api",
         "--launch-profile",
         "http"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Fisgada Pro: painel",
+      "label": "Clube360: painel",
       "type": "process",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "src/FisgadaPro.Web",
+        "src/Clube360.Web",
         "--launch-profile",
         "http"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Fisgada Pro: configurar contas locais",
+      "label": "Clube360: configurar contas locais",
       "type": "process",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "tools/FisgadaPro.Setup"
+        "tools/Clube360.Setup"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Fisgada Pro: verificar acessos",
+      "label": "Clube360: verificar acessos",
       "type": "process",
       "command": "dotnet",
       "args": [
         "run",
         "--project",
-        "tests/FisgadaPro.Access.Checks"
+        "tests/Clube360.Access.Checks"
       ],
       "problemMatcher": "$msCompile"
     }

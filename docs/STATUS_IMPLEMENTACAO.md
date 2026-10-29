@@ -1,4 +1,4 @@
-# Estado da implementação — 0.3.0
+# Estado da implementação — 0.3.1
 
 ## Implementado para validação local
 
@@ -15,7 +15,7 @@
 
 ## Verificado neste ambiente
 
-Compilação da solução de servidor/web e ferramentas, sem avisos nem erros. **55 verificações de domínio/aplicação/persistência** e **64 verificações de autorização e fluxo HTTP**, incluindo isolamento entre clubes, perfis, dependentes, cobrança da reserva, conflitos, prazo de cancelamento, aprovações, antiforgery e inativação de acesso. Testes trabalham em pastas temporárias e não modificam contas locais do usuário.
+Compilação da solução de servidor/web e ferramentas, sem avisos nem erros. **59 verificações de domínio/aplicação/persistência** e **64 verificações de autorização e fluxo HTTP**, incluindo isolamento entre clubes, perfis, dependentes, cobrança da reserva, conflitos, prazo de cancelamento, aprovações, antiforgery e inativação de acesso. Testes trabalham em pastas temporárias e não modificam contas locais do usuário.
 
 O aplicativo MAUI foi atualizado no código, mas **esta versão Android ainda não foi compilada nem executada neste ambiente**, que não dispõe do SDK Android/workload MAUI. Exige validação no computador e celular do usuário. Os testes HTTP não substituem revisão visual e uso das telas em navegador e aparelho.
 

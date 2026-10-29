@@ -12,10 +12,12 @@ Os e-mails abaixo são os exemplos anteriores; se foram alterados no configurado
 
 Saia e entre novamente após atualizar: a identidade de sessão e o perfil de plataforma foram ajustados. As chaves antigas do configurador (Administrador, Socio e Plataforma) permanecem compatíveis. A plataforma agora possui gestão global, conforme o novo requisito.
 
+Para novas instalações, os exemplos do configurador usam `@clube360.test`. Os e-mails antigos acima continuam válidos para quem já configurou. Não é necessário executar o configurador para mudar a marca.
+
 ## Primeira instalação sem contas
 
 ```powershell
-dotnet run --project tools/FisgadaPro.Setup
+dotnet run --project tools/Clube360.Setup
 ```
 
 O configurador pede e-mail e senha dos três perfis iniciais e grava somente hashes em user-secrets, fora do Git. A senha mínima de quatro caracteres é mantida para o desenvolvimento local. Não publique senhas, hashes ou arquivos App_Data.
@@ -33,7 +35,7 @@ Inativar o cadastro associativo bloqueia a conta Socio nas próximas requisiçõ
 No PC, execute API em Development, na rede local:
 
 ```powershell
-dotnet run --project src/FisgadaPro.Api --launch-profile http --urls http://0.0.0.0:5187
+dotnet run --project src/Clube360.Api --launch-profile http --urls http://0.0.0.0:5187
 ```
 
 PC e celular devem estar na mesma rede. No app informe `http://IP_DO_COMPUTADOR:5187`. Esse IP é do PC; IP/porta do pareamento ADB são outra conexão e não devem ser usados como endereço da API. Se necessário, autorize a porta da API apenas na rede privada do Windows.
