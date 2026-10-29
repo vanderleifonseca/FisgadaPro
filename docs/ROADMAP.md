@@ -1,46 +1,13 @@
-# Roteiro proposto — Fisgada Pro
+# Próximas etapas
 
-A ordem abaixo é uma proposta, sem datas ou estimativas aprovadas. Em 27/10/2026 foi autorizada a implementação inicial; veja STATUS_IMPLEMENTACAO.md.
+1. Validar a versão 0.3 no navegador e compilar/executar o Android no ambiente do usuário.
+2. Confirmar as [decisões de negócio](DECISOES_PENDENTES.md), especialmente familiares, convidados, taxas, vencimentos e cancelamento.
+3. Substituir JSON por banco relacional, com migrações, concorrência, backups e trilha de auditoria.
+4. Implementar identidade global e vínculos de associado em múltiplos clubes.
+5. Integrar banco/provedor para boleto, envio, pagamento, conciliação e reembolso.
+6. Completar eventos: descontos por vínculo/clube, capacidade, cancelamento e presença.
+7. Implementar comunicação interna e avisos em massa com permissões por clube/plataforma.
+8. Retomar, conforme prioridade, atletas, barcos, estaleiro, cantina e oficina/manutenção do escopo anterior.
+9. Preparar produção: hospedagem, HTTPS, recuperação de acesso, política de senha, monitoramento e proteção de dados.
 
-## 1. Concluir o planejamento
-
-- Resolver as decisões pendentes.
-- Detalhar perfis e permissões por clube.
-- Desenhar fluxos e telas.
-- Aprovar o escopo inicial, o modelo conceitual e a arquitetura.
-- Autorização para iniciar o código recebida em 27/10/2026.
-
-## 2. Fundação e gestão associativa
-
-- Contas, clubes, vínculos e permissões.
-- Isolamento dos dados entre clubes.
-- Associados, categorias e familiares.
-- Histórico de alterações administrativas.
-
-## 3. Financeiro e comunicados
-
-- Mensalidades, cobranças, recebimentos e inadimplência.
-- Integrações de pagamento e confirmação confiável.
-- Comunicados oficiais com destinatários autorizados.
-
-## 4. Embarcações e operação
-
-- Embarcações, autorizações e estaleiro.
-- Contratos de guarda e mensalidades.
-- Solicitações e execução da colocação na água.
-
-## 5. Eventos compartilhados
-
-- Publicação, inscrições e controle de vagas.
-- Preços por vínculo associativo.
-- Pagamentos e comunicação com inscritos.
-
-## 6. Oficina e comunicação ampliada
-
-- Orçamentos, aprovação e ordens de serviço.
-- Materiais e mão de obra.
-- Interação entre associados, conforme regras aprovadas.
-
-## Critérios para as futuras entregas
-
-Cada etapa deverá verificar o fluxo funcional, as permissões e o isolamento por clube. Operações financeiras deverão manter histórico, evitar duplicidades e ser verificadas com cenários de falha. A versão inicial oferece verificações executáveis de domínio e consultas demonstrativas. Cadastros reais, autenticação e persistência ainda dependem das próximas entregas.
+A versão 0.3 é uma base funcional de desenvolvimento; não representa conclusão de todos esses módulos.

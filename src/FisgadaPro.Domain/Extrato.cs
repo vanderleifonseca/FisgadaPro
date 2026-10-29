@@ -28,12 +28,12 @@ public static class ComposicaoExtrato
         var pessoas = associados.ToDictionary(a => a.Id);
         var titular = pessoas.GetValueOrDefault(titularId)
             ?? throw new ArgumentException("Titular não pertence ao clube.");
-        if (titular.Categoria == Categoria.Familiar)
+        if (titular.Categoria == Categoria.Dependente)
             throw new ArgumentException("Selecione um titular.");
-        foreach (var familiar in associados.Where(a => a.Categoria == Categoria.Familiar))
+        foreach (var familiar in associados.Where(a => a.Categoria == Categoria.Dependente))
         {
             if (!pessoas.TryGetValue(familiar.TitularId!.Value, out var responsavel) ||
-                responsavel.Categoria == Categoria.Familiar)
+                responsavel.Categoria == Categoria.Dependente)
                 throw new ArgumentException("Familiar precisa de titular do mesmo clube.");
         }
         var itens = new List<ItemExtrato>();

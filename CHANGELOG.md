@@ -1,5 +1,10 @@
 # Histórico de alterações
 
+## 0.3.0 — Gestão social de clubes
+
+Adaptação para foz 2 e guaira2, novos cadastros, categorias associativas e dependentes. Perfis SuperAdmin, Presidente, Administrador, Tesoureiro e Socio. Persistência JSON local, criação de acessos, eventos públicos/restritos e convites com aprovação. Agenda de espaços, prevenção de conflito, aluguel com lançamento financeiro e cancelamento até 120 horas antes. Mensalidades por competência, inadimplência e baixa manual auditada. Solicitações/reclamações com histórico. Painel Blazor e app MAUI atualizados. Boleto permanece pendente de integração bancária; Android desta versão aguarda validação local. Planejamento anterior preservado em docs/historico.
+
+
 ## 2026-10-27 — Senhas curtas para contas locais de teste
 
 - Reduzido o mínimo de senha no configurador de 12 para 4 caracteres, a pedido do responsável, temporariamente para testes locais.

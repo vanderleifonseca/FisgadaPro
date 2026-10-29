@@ -18,12 +18,12 @@ public sealed class ConsultaDemonstracao(IDadosDemonstracao dados)
     public IReadOnlyList<AssociadoDto>? Associados(Guid clubeId) =>
         dados.Clubes.All(c => c.Id != clubeId) ? null :
         dados.Associados.Where(a => a.ClubeId == clubeId)
-            .Select(a => new AssociadoDto(a.Id, a.Nome, a.Categoria.ToString(), a.Atleta, a.Isento, a.TitularId)).ToArray();
+            .Select(a => new AssociadoDto(a.Id, a.Nome, a.Categoria.ToString(), a.DireitoVoto, a.Isento, a.TitularId)).ToArray();
 
     public ExtratoDto? Extrato(Guid clubeId, Guid titularId)
     {
         var pessoas = dados.Associados.Where(a => a.ClubeId == clubeId).ToArray();
-        if (pessoas.All(a => a.Id != titularId || a.Categoria == Categoria.Familiar)) return null;
+        if (pessoas.All(a => a.Id != titularId || a.Categoria == Categoria.Dependente)) return null;
         var extrato = ComposicaoExtrato.Calcular(clubeId, titularId, pessoas,
             dados.Despesas.Where(d => d.ClubeId == clubeId).ToArray(), dados.Tabela(clubeId));
         return new(extrato.Titular, extrato.Mensalidade, extrato.TotalConsumos, extrato.Total,

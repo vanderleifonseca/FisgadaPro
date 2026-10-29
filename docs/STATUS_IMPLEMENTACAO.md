@@ -1,34 +1,30 @@
-# Estado da implementação — 0.2.0
+# Estado da implementação — 0.3.0
 
-Atualização: 27/10/2026.
+## Implementado para validação local
 
-## Entregue
+- Clubes iniciais foz 2 e guaira2 e inclusão de novos clubes por super administrador.
+- Cadastro e edição de dados de clube, associado, dependente e espaço/taxa.
+- Categorias principais associado, fundador, convidado e simpatizante; dependente vinculado ao titular; direito a voto como informação derivada.
+- Perfis super administrador, presidente, administrador, tesoureiro e associado, com autorização por clube na API.
+- Criação de contas pelo perfil competente, senhas com hash, login web e app e bloqueio do associado inativo.
+- Eventos públicos/restritos, inscrição, convite com aprovação e prevenção de duplicidade por CPF.
+- Agenda de eventos/locações, conflito de horários, cobrança da reserva e cancelamento até 120 horas antes.
+- Mensalidades por competência, contas vencidas, baixa manual com usuário/data e cancelamento/reembolso pendente.
+- Solicitações/reclamações com retorno e histórico do próprio associado.
+- JSON local persistente para cadastros, operações e contas criadas.
 
-- Login com contas de teste configuradas localmente, sem senha padrão no código.
-- Hash de senha do ASP.NET Core Identity; segredos locais armazenam somente o hash.
-- Tokens opacos do ASP.NET Core na API, com validade de 20 minutos.
-- Sessão web por cookie HttpOnly, com proteção antiforgery nos formulários de entrada e saída.
-- Limite de cinco tentativas de login por minuto por IP.
-- Verificação de perfil e clube em cada endpoint de dados.
-- Sócio consulta o próprio extrato; administrador consulta seu clube; plataforma lista clubes sem dados financeiros.
-- Painel conectado à API. Aplicativo alterado para login de associado e consulta autenticada do próprio extrato.
-- Consumidor identificado e responsabilidade do titular preservados; familiar sem taxa fixa adicional.
+## Verificado neste ambiente
 
-## Verificação
+Compilação da solução de servidor/web e ferramentas, sem avisos nem erros. **55 verificações de domínio/aplicação/persistência** e **64 verificações de autorização e fluxo HTTP**, incluindo isolamento entre clubes, perfis, dependentes, cobrança da reserva, conflitos, prazo de cancelamento, aprovações, antiforgery e inativação de acesso. Testes trabalham em pastas temporárias e não modificam contas locais do usuário.
 
-- Solução principal e configurador compilados com .NET 10.
-- 13 verificações de regras financeiras aprovadas.
-- 22 verificações de acesso e fluxo HTTP aprovadas, incluindo cookie web, CSRF, login incorreto, limites e tentativas entre perfis/clubes.
-- Fluxo web exercitado por HTTP e conteúdo renderizado. Interação visual da versão 0.2.0 ainda deve ser testada no navegador pelo usuário.
-- Versão Android 0.1.0 e correção de SVGs confirmadas pelo usuário em aparelho, via cabo e Wi-Fi.
-- Android 0.2.0: fontes alteradas; sem SDK Android no ambiente do agente para compilação. Validar no ambiente local do usuário.
+O aplicativo MAUI foi atualizado no código, mas **esta versão Android ainda não foi compilada nem executada neste ambiente**, que não dispõe do SDK Android/workload MAUI. Exige validação no computador e celular do usuário. Os testes HTTP não substituem revisão visual e uso das telas em navegador e aparelho.
 
-## Limites explícitos
+## Limitações materiais
 
-Os três perfis estão vinculados a dados fictícios fixos, e não há banco de usuários. As contas são configuradas por ferramenta local; não há cadastro público, recuperação de senha, MFA ou revogação imediata de tokens. Sair descarta a sessão do cliente; tokens emitidos vencem em até 20 minutos.
+Não há emissão/envio de boleto, liquidação automática nem devolução bancária. O botão de boleto mostra a pendência. Baixa de pagamento é manual; não constitui confirmação bancária.
 
-API e painel continuam somente para Development. O app Debug permite HTTP para rede local; Release requer HTTPS. Ainda não existe configuração de produção.
+A persistência JSON atende apenas desenvolvimento com uma instância da API. Não há transação distribuída entre arquivo de contas e arquivo de negócios; não há banco de produção, migrações ou auditoria completa. Proteja e faça backup dos dois arquivos juntos. Os endpoints de negócio são habilitados somente em Development.
 
-Não há persistência dos associados/lançamentos, cadastros reais, gestão de novos clubes, múltiplos vínculos configuráveis, permissões de operador/financeiro/manutenção/diretoria, cobrança bancária, estaleiro, eventos operacionais ou oficina. O limite etário dos filhos permanece pendente.
+As contas iniciais de teste mantêm credenciais anteriores e vínculos locais. Novas contas têm um clube por vínculo; múltiplos clubes de um associado ainda não estão concluídos. Dados de CPF e contatos dos exemplos históricos permanecem vazios, devendo ser preenchidos ao editar.
 
-Próximo incremento: persistência e cadastros reais, preservando autenticação e autorização no servidor.
+Ainda faltam descontos entre clubes, comunicação em massa, módulos náuticos/oficina/cantina e decisões do [registro de pendências](DECISOES_PENDENTES.md). As taxas de exemplo não foram aprovadas como valores oficiais.

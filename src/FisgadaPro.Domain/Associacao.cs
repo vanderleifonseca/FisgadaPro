@@ -1,45 +1,61 @@
 namespace FisgadaPro.Domain;
 
-public enum Categoria { Mensalista, Fundador, Familiar }
+public enum Categoria { Associado, Fundador, Convidado, Simpatizante, Dependente }
 public enum Parentesco { Pai, Mae, Filho, Filha, Avo, Avoa, Conjuge }
 
-public sealed record Clube(Guid Id, string Nome);
-
-public sealed record Associado(
-    Guid Id, Guid ClubeId, string Nome, Categoria Categoria,
-    bool Atleta = false, bool Isento = false,
-    Guid? TitularId = null, Parentesco? Parentesco = null)
+public sealed record Clube(Guid Id, string Nome, string Sigla = "", string Endereco = "",
+    string Bairro = "", string Cidade = "", string Uf = "", string Fone = "", string Email = "",
+    decimal ValorMensalPadrao = 0m)
 {
-    public void Validar()
-    {
-        if (Id == Guid.Empty || ClubeId == Guid.Empty || string.IsNullOrWhiteSpace(Nome))
-            throw new ArgumentException("Informe identificação, clube e nome.");
-        if (!Enum.IsDefined(Categoria))
-            throw new ArgumentException("Categoria inválida.");
-        if (Categoria == Categoria.Familiar)
-        {
-            if (TitularId is null || TitularId == Guid.Empty || TitularId == Id ||
-                Parentesco is null || !Enum.IsDefined(Parentesco.Value) || Atleta || Isento)
-                throw new ArgumentException("Familiar exige titular e parentesco; não possui mensalidade própria.");
-        }
-        else if (TitularId is not null || Parentesco is not null)
-            throw new ArgumentException("Somente familiar possui vínculo com titular.");
-        if (Isento && Categoria != Categoria.Fundador)
-            throw new ArgumentException("Nesta etapa, a opção de isenção pertence ao fundador.");
+    public void Validar() {
+        if (Id == Guid.Empty || string.IsNullOrWhiteSpace(Nome) || string.IsNullOrWhiteSpace(Sigla))
+            throw new ArgumentException("Informe nome e sigla do clube.");
+        if (ValorMensalPadrao < 0 || (Uf.Length != 0 && Uf.Length != 2))
+            throw new ArgumentException("Mensalidade ou UF inválida.");
     }
 }
-
-public sealed record TabelaMensalidade(decimal Normal, decimal Atleta)
+public sealed record Associado(Guid Id, Guid ClubeId, string Nome, Categoria Categoria,
+    bool Isento = false, Guid? TitularId = null, Parentesco? Parentesco = null,
+    string Cpf = "", string Endereco = "", string Bairro = "", string Sexo = "",
+    string EstadoCivil = "", string Cidade = "", string Uf = "", string Fone = "",
+    string Email = "", DateOnly? DataNascimento = null, string[]? Interesses = null,
+    decimal? ValorMensal = null, bool Ativo = true)
 {
-    public decimal Calcular(Associado associado)
-    {
+    public bool DireitoVoto => Ativo && Categoria is Categoria.Associado or Categoria.Fundador;
+    public void Validar() {
+        if (Id == Guid.Empty || ClubeId == Guid.Empty || string.IsNullOrWhiteSpace(Nome) || !Enum.IsDefined(Categoria))
+            throw new ArgumentException("Identificação, clube, nome ou categoria inválidos.");
+        if (Categoria == Categoria.Dependente) {
+            if (TitularId is null || TitularId == Guid.Empty || TitularId == Id ||
+                Parentesco is null || !Enum.IsDefined(Parentesco.Value) || Isento || ValorMensal is > 0)
+                throw new ArgumentException("Dependente exige titular e parentesco e não possui taxa fixa adicional.");
+        } else if (TitularId is not null || Parentesco is not null)
+            throw new ArgumentException("Somente dependente possui titular e parentesco.");
+        if (Isento && Categoria != Categoria.Fundador)
+            throw new ArgumentException("A opção de isenção pertence ao fundador.");
+        if (ValorMensal is < 0) throw new ArgumentException("Mensalidade negativa.");
+    }
+}
+public sealed record TabelaMensalidade(decimal Normal)
+{
+    public decimal Calcular(Associado associado) {
         associado.Validar();
-        if (Normal < 0 || Atleta < 0)
-            throw new ArgumentException("Mensalidades não podem ser negativas.");
-        if (associado.Categoria == Categoria.Familiar) return 0m;
-        if (associado.Isento && associado.Atleta)
-            throw new InvalidOperationException("Defina com a diretoria a prioridade entre isenção e condição de atleta.");
-        if (associado.Isento) return 0m;
-        return associado.Atleta ? Atleta : Normal;
+        if (Normal < 0) throw new ArgumentException("Mensalidade negativa.");
+        if (!associado.Ativo || associado.Categoria == Categoria.Dependente || associado.Isento) return 0;
+        return associado.ValorMensal ?? (associado.Categoria is Categoria.Associado or Categoria.Fundador ? Normal : 0m);
+    }
+}
+public static class DocumentoCpf
+{
+    public static string Normalizar(string? cpf) => new((cpf ?? "").Where(char.IsAsciiDigit).ToArray());
+    public static bool Valido(string? cpf) {
+        var s = Normalizar(cpf);
+        if (s.Length != 11 || s.Distinct().Count() == 1) return false;
+        for (var n = 9; n <= 10; n++) {
+            var soma = Enumerable.Range(0, n).Sum(i => (s[i]-'0')*(n+1-i));
+            var digito = soma*10%11; if (digito == 10) digito = 0;
+            if (s[n]-'0' != digito) return false;
+        }
+        return true;
     }
 }

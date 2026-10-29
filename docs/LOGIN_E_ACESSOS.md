@@ -1,111 +1,41 @@
-# Login e acessos — versão 0.2.0
+# Login e permissões — 0.3
 
-## 1. Atualizar e compilar
+As credenciais já criadas no seu computador são preservadas em user-secrets. Não há senha padrão. Se já acessava o sistema, não precisa reconfigurar.
 
-Encerre API e painel com Ctrl+C para liberar os arquivos. Na raiz C:\maui\FisgadaPro:
+Os e-mails abaixo são os exemplos anteriores; se foram alterados no configurador, use os que você cadastrou:
 
-~~~powershell
-git pull --ff-only
-dotnet build FisgadaPro.slnx
-~~~
+| Conta de exemplo | Acesso nesta versão |
+| --- | --- |
+| plataforma@fisgada.test | SuperAdmin: cadastra clubes e presidentes, gerencia todos os clubes |
+| administrador@fisgada.test | Administrador de foz 2 |
+| socio@fisgada.test | Alex Exemplo, fundador de foz 2, com dependente Bia |
 
-Resultado esperado: compilação sem erros. Se o Git apontar alterações locais, preserve-as antes de continuar; não use reset para descartá-las.
+Saia e entre novamente após atualizar: a identidade de sessão e o perfil de plataforma foram ajustados. As chaves antigas do configurador (Administrador, Socio e Plataforma) permanecem compatíveis. A plataforma agora possui gestão global, conforme o novo requisito.
 
-## 2. Configurar as contas locais
+## Primeira instalação sem contas
 
-~~~powershell
+```powershell
 dotnet run --project tools/FisgadaPro.Setup
-~~~
+```
 
-O programa pergunta e-mail e senha para cada perfil:
+O configurador pede e-mail e senha dos três perfis iniciais e grava somente hashes em user-secrets, fora do Git. A senha mínima de quatro caracteres é mantida para o desenvolvimento local. Não publique senhas, hashes ou arquivos App_Data.
 
-| Perfil | E-mail sugerido (pode alterar) | Vínculo fictício |
-| --- | --- | --- |
-| Administrador | administrador@fisgada.test | Administração do Clube Lago |
-| Socio | socio@fisgada.test | Alex Exemplo, titular de Bia |
-| Plataforma | plataforma@fisgada.test | Consulta dos clubes |
+## Liberar outros usuários
 
-Pressione Enter para aceitar cada e-mail sugerido. Escolha uma senha de 4 a 256 caracteres, conforme a regra temporária para estas contas locais de teste, e confirme-a; os caracteres não aparecem enquanto você digita. Use e-mails diferentes para os perfis.
+Entre com SuperAdmin, selecione o clube e abra Acessos para cadastrar seu presidente. O presidente pode liberar administrador e tesoureiro do próprio clube e acessos Socio vinculados a pessoas cadastradas. Administrador libera acesso Socio; não cria presidentes nem super administradores. Categoria de associado não é perfil de usuário.
 
-Resultado esperado: “Contas de teste configuradas”. Somente hashes de senha são gravados no user-secrets FisgadaPro.Api.Local, fora do Git. Não envie suas senhas na conversa.
+Tesoureiro usa o painel web financeiro. Associado e dependente usam o app ou área própria no navegador. Cada conta criada é um usuário distinto; não compartilhe credenciais de função.
 
-O configurador pode ser executado novamente para alterar as três contas. Reinicie a API depois. Tokens já emitidos expiram em até 20 minutos; nesta etapa não há revogação remota imediata.
+Inativar o cadastro associativo bloqueia a conta Socio nas próximas requisições. Alterar senha, recuperar senha e desativar diretamente contas administrativas ainda são pendências. Tokens vencem em até 20 minutos; sair remove a sessão do cliente.
 
-## 3. Abrir API e painel
+## Conectar o celular
 
-Primeiro terminal:
+No PC, execute API em Development, na rede local:
 
-~~~powershell
-dotnet run --project src/FisgadaPro.Api --launch-profile http
-~~~
+```powershell
+dotnet run --project src/FisgadaPro.Api --launch-profile http --urls http://0.0.0.0:5187
+```
 
-Segundo terminal:
+PC e celular devem estar na mesma rede. No app informe `http://IP_DO_COMPUTADOR:5187`. Esse IP é do PC; IP/porta do pareamento ADB são outra conexão e não devem ser usados como endereço da API. Se necessário, autorize a porta da API apenas na rede privada do Windows.
 
-~~~powershell
-dotnet run --project src/FisgadaPro.Web --launch-profile http
-~~~
-
-Abra http://localhost:5216/entrar e teste cada conta. Use Sair antes de trocar de usuário.
-
-- Administrador: lista apenas os associados do Clube Lago e consulta suas prévias.
-- Socio: mostra Área do associado e somente a conta de Alex com despesas de Bia.
-- Plataforma: lista os clubes, sem expor sócios ou extratos.
-
-Sem configurar contas, nenhum login é aceito. Cinco tentativas de login por minuto por IP são permitidas; após isso aguarde um minuto. A sessão dura 20 minutos; entre novamente quando expirar.
-
-## 4. Conectar o aplicativo à API pela rede
-
-A conexão ADB por Wi-Fi serve para instalar e depurar o app. O login usa outra conexão: celular → API do computador.
-
-No computador, execute:
-
-~~~powershell
-ipconfig
-~~~
-
-Identifique o IPv4 do adaptador conectado à mesma rede do celular. Use o IP do computador, não o IP 192.168.86.82 do celular e não a porta da depuração ADB.
-
-Encerre a API anterior e execute:
-
-~~~powershell
-dotnet run --project src/FisgadaPro.Api --launch-profile http -- --urls http://0.0.0.0:5187
-~~~
-
-Resultado esperado: servidor ouvindo na porta 5187. A rede precisa permitir comunicação entre os dispositivos e o Firewall do Windows deve permitir a API na rede privada usada no teste.
-
-No navegador do celular, teste http://IP-DO-COMPUTADOR:5187/api/v1/status, substituindo o IP. A resposta deve mostrar Fisgada Pro e versão 0.2.0.
-
-## 5. Atualizar o app
-
-Com o celular já listado como device:
-
-~~~powershell
-dotnet build src/FisgadaPro.App/FisgadaPro.App.csproj -t:Run -p:AndroidSdkDirectory="C:\Program Files (x86)\Android\android-sdk"
-~~~
-
-Na tela do aplicativo:
-
-1. Informe http://IP-DO-COMPUTADOR:5187.
-2. Digite o e-mail e a senha escolhidos para Socio.
-3. Toque Entrar.
-4. Consulte a conta de Alex e as despesas familiares.
-5. Toque Sair; a sessão e os dados devem desaparecer.
-
-A conta Administrador deve receber orientação para usar o painel web. O app não oferece mais a lista geral de associados.
-
-O endereço da API é lembrado; senha e token ficam apenas em memória. Ao fechar o processo do app será necessário entrar novamente. O modo Debug permite HTTP para o teste local; Release bloqueia tráfego sem HTTPS. Não use senhas de serviços reais nesse ambiente local de demonstração.
-
-## 6. Validar as restrições
-
-~~~powershell
-dotnet run --project tests/FisgadaPro.Domain.Checks
-dotnet run --project tests/FisgadaPro.Access.Checks
-~~~
-
-Resultados: 13 verificações de domínio e 22 de acesso. Os testes verificam login, senha incorreta, exigência de token, permissões, separação de clubes, composição familiar, formulário protegido contra CSRF e limite de tentativas.
-
-## Escopo e próximos passos
-
-Esta entrega autentica contas locais vinculadas a pessoas fictícias. Não é ainda um cadastro de usuários persistente nem um sistema pronto para operação real. A API e o painel continuam restritos ao ambiente Development. Não há recuperação de senha, MFA, cadastro público ou gestão de sessões.
-
-A próxima etapa será escolher/configurar a persistência e implementar os cadastros reais e vínculos, mantendo a mesma verificação de permissões na API.
+O transporte HTTP é destinado ao teste local. Para produção será necessário HTTPS e revisão de segurança. Veja [Execução](EXECUCAO_VSCODE.md) e [Roteiro de teste](TESTE_0_3.md).

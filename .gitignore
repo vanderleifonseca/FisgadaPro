@@ -29,3 +29,7 @@ appsettings.*.Local.json
 *.tmp
 .DS_Store
 Thumbs.db
+
+# Dados e credenciais locais de desenvolvimento
+**/App_Data/
+**/core
